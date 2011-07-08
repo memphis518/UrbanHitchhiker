@@ -1,0 +1,34 @@
+<div id='loginfailedpage'>
+	<div id="loginfailederror">
+	<b class="loginfailedtop"><b class="lf1"></b><b class="lf2"></b><b class="lf3"></b><b class="lf4"></b></b>
+	<div class="loginfailedcontent">
+		<div class="loginfailedcontentheader">Login Failed</div>
+		<div class="loginfailedcontentbody">
+				<div style='padding:10px;'>The username and password you used did not match our records.  Please try to login again.</div>
+                                <form id='loginfailed' action='/users/login' method='POST'>
+                                  <table>
+                                          <tr>
+                                                  <td class='loginfailedlabel'>username:  </td>
+                                                  <td class='loginfailedfield'>
+                                                          <input class='loginfailedformfield' type='text' name='username' id='loginfailedusername' value=''>
+                                                  </td>
+                                          </tr>
+                                          <tr>
+                                                  <td class='loginfailedlabel'>password:  </td>
+                                                  <td class='loginfailedfield'><input class='loginfailedformfield'  type='password' name='password' id='loginfailedpassword''></td>
+                                          </tr>
+                                          <tr>
+                                                  <td colspan='2'>&nbsp;</td>
+                                          </tr>
+                                  </table>
+                                  <div class='loginfailedbutton'>
+                                    <input type='submit' id='loginfailedbutton' name='loginfailedbutton' value='login' class='loginbuttonlarge'>
+                                  </div>
+                                </form>
+		</div>
+	</div>
+	
+	<b class="loginfailedbottom"><b class="lfb4"></b><b class="lfb3"></b><b class="lfb2"></b><b class="lfb1"></b></b>
+	</div>
+	
+</div>

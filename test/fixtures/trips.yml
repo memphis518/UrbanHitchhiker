@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+mellisa:
+  id: 900009
+  origin: Austin,TX
+  destination: Chico,CA
+  trip_type: Driver
+  name: Visiting Mellisa
+  time: 2011-06-19 12:08:55
+  comments: This is my trip to visit Mellisa
+  transportation: Car
+  user_id: 1000001
+
+papa: 
+  id: 909009
+  origin: Memphis,TN
+  destination: Austin,TX
+  trip_type: Rider
+  name: Visiting Ben
+  time: 2011-06-19 12:08:55
+  comments: This is a trip for Papa to visit Ben
+  transportation: Bus
+  user_id: 1000002

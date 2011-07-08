@@ -1,0 +1,147 @@
+body { font-family: sans-serif; font-size:10pt; margin: 5px 5px;}
+
+/* Banner */
+
+#banner {background: transparent; width:900px}
+
+.btop, .bbottom {display:block; background:transparent; font-size:1px;}
+.bb1, .bb2, .bb3, .bb4 {display:block; overflow:hidden;}
+.bb1, .bb2, .bb3 {height:1px;}
+.bb2, .bb3, .bb4 {background:#99b27f; border-left:1px solid #99b27f; border-right:1px solid #99b27f;}
+.bb1 {margin:0 5px; background:#99b27f;}
+.bb2 {margin:0 3px; border-width:0 2px;}
+.bb3 {margin:0 2px;}
+.bb4 {height:2px; margin:0 1px;}
+
+.bboxcontent {display:block; background:#99b27f; border:0 solid #99b27f; border-width:0 1px;  height:50px;}
+
+/* Footer */
+
+.footer {width: 900px; clear: both; float:none; padding-top:200px; font-size:8pt;}
+.footerspan{ padding-left:120px; color: #9A9A9A }
+a.footerlink:link    {color: #9A9A9A;}
+a.footerlink:active  {color: #9A9A9A;}
+a.footerlink:visited {color: #9A9A9A;}
+a.footerlink:hover   {color: #9A9A9A;}
+
+/* Home Page */
+
+.page          {width:900px; height: 700px;  }
+.homeleftframe { float:left; }
+.homerightframe{ float:left; }
+
+.welcometext  { padding-top: 80px; padding-left: 20px; width: 350px; }
+.welcomeimage { padding-top: 50px; padding-left:20px; }
+.signupbutton { background: #C8E5AA; border:1px solid #000000; color:#000000; font-weight:bold;  font-size: 14px; padding:5px;}
+.signupbuttonhover { background: #99b27f; border:1px solid #000000; color:#000000; font-weight:bold;  font-size: 14px; padding:5px;}
+.signup       { text-align: center; padding-top: 10px; }
+
+.logodiv   { padding-top: 15px; padding-left: 20px; float:left; width: 400px; }
+.signindiv { padding-top: 15px; float:left; width: 450px; text-align:right; }
+
+.loginusername       { color: #9A9A9A; }
+.loginpassword       { color: #9A9A9A; }
+.loginbutton         { background: #C8E5AA; border:1px solid #000000; color:#000000; font-weight:bold; padding:2px;}
+.loginbuttonhover  { background: #99b27f; border:1px solid #000000; color:#000000; font-weight:bold; padding:2px;}
+
+/* Edit User */
+.createuserform      { padding-top: 100px; padding-left: 20px; width: 350px; }
+.edituserform        { padding-top: 20px; padding-left: 150px; width: 350px; }
+.userformlabel       { width:80px; display:block; clear:left; float:left;}
+.userformfield       { height:20px; width: 250px }
+.userformerror       { width: 350px;
+                       border: 2px solid #990000;
+                       padding: 7px;
+                       padding-bottom: 0;
+                       margin-bottom: 20px;
+                       background-color: #f0f0f0;}
+.userbutton      { background: #C8E5AA; border:1px solid #000000; color:#000000; font-weight:bold;  font-size: 14px; padding:5px;}
+.userbuttonhover { background: #99b27f; border:1px solid #000000; color:#000000; font-weight:bold;  font-size: 14px; padding:5px;}
+.useraction      { text-align: center; padding-top: 10px; }
+
+.userformerror h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #990000;
+  color: #fff;
+}
+
+.userformerror ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+
+/* Login Failed Page */
+
+#loginfailedpage  {padding:100px 100px 100px 200px;}
+#loginfailederror {background: transparent; margin:1px 1px 1px 1px; width:500px; float:left;}
+
+.loginfailedlabel     { width:100px; text-align:right;}
+.loginfailedfield     { width:250px; text-align:left; padding-left:3px;}
+.loginfailedformfield { height:20px; width: 250px }
+
+.loginfailedtop, .loginfailedbottom {display:block; background:transparent; font-size:1px;}
+.lf1, .lf2, .lf3, .lf4 {display:block; overflow:hidden;}
+.lf1, .lf2, .lf3 {height:1px;}
+.lf2, .lf3, .lf4 {background:#99b27f; border-left:1px solid #000000; border-right:1px solid #000000;}
+.lf1 {margin:0 5px; background:#000000;}
+.lf2 {margin:0 3px; border-width:0 2px;}
+.lf3 {margin:0 2px;}
+.lf4 {height:2px; margin:0 1px;}
+
+.lfb1, .lfb2, .lfb3, .lfb4 {display:block; overflow:hidden;}
+.lfb1, .lfb2, .lfb3 {height:1px;}
+.lfb2, .lfb3, .lfb4 {background:#ffffff; border-left:1px solid #000000; border-right:1px solid #000000;}
+.lfb1 {margin:0 5px; background:#000000;}
+.lfb2 {margin:0 3px; border-width:0 2px;}
+.lfb3 {margin:0 2px;}
+.lfb4 {height:2px; margin:0 1px;}
+
+.loginfailedcontent {display:block; background:#ffffff; border:0 solid #000000; border-width:0 1px;  height:225px;}
+.loginfailedcontentheader { background: #99b27f; height:25px; padding: 5px; font-weight: bold;}
+.loginfailedcontentbody   { height: 200px; padding: 10px 5px 10px 5px;}
+
+.loginbuttonlarge         { background: #C8E5AA; border:1px solid #000000; color:#000000; font-weight:bold; font-size:14px; padding:5px;}
+.loginbuttonhoverlarge  { background: #99b27f; border:1px solid #000000; color:#000000; font-weight:bold; font-size:14px; padding:5px;}
+.loginfailedbutton        { padding-left:200px; }
+
+/* Navigation */
+
+#leftnavigationpage  {padding:20px 10px 0px 5px;}
+#leftnavigation {background: transparent; margin:1px 1px 1px 1px; width:150px; float:left;}
+.leftnavtop, .leftnavbottom {display:block; background:transparent; font-size:1px;}
+.ln1, .ln2, .ln3, .ln4 {display:block; overflow:hidden;}
+.ln1, .ln2, .ln3 {height:1px;}
+.ln2, .ln3, .ln4 {background:#99b27f; border-left:1px solid #99b27f; border-right:1px solid #99b27f;}
+.ln1 {margin:0 5px; background:#99b27f;}
+.ln2 {margin:0 3px; border-width:0 2px;}
+.ln3 {margin:0 2px;}
+.ln4 {height:2px; margin:0 1px;}
+
+.lnb1, .lnb2, .lnb3, .lnb4 {display:block; overflow:hidden;}
+.lnb1, .lnb2, .lnb3 {height:1px;}
+.lnb2, .lnb3, .lnb4 {background:#ffffff; border-left:1px solid #99b27f; border-right:1px solid #99b27f;}
+.lnb1 {margin:0 5px; background:#99b27f;}
+.lnb2 {margin:0 3px; border-width:0 2px;}
+.lnb3 {margin:0 2px;}
+.lnb4 {height:2px; margin:0 1px;}
+
+.leftnavcontent {display:block; background:#ffffff; border:0 solid #99b27f; border-width:0 1px;  height:225px;}
+.leftnavcontentheader { background: #99b27f; height:10px; padding: 5px; font-weight: bold;}
+.leftnavcontentbody   { height: 200px; padding: 10px 5px 10px 5px; width:150px;}
+
+/* Links */
+.linkhover { color:#99b27f; text-decoration: underline; cursor: pointer; }
+
+/* Spacer */
+.spacer { padding:10px; }
+
+/* Trips */
+.trips          { padding-top: 30px; padding-left: 80px;}
+.map            { height:400px; width:618px; border: 1px solid #000000;}
+
