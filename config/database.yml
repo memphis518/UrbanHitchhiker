@@ -2,7 +2,7 @@
 #   gem install sqlite3
 development:
   adapter: sqlite3
-  database: db/urbanhitchhiker.development
+  database: db/dev.sqlite3
   pool: 5
   timeout: 5000
 
