@@ -87,5 +87,5 @@ function setInitalLocation(map){
 }
 
 function loadTripsJS(){
-    $( "#selectable" ).selectable();
+    $("#tripsaccordion").accordion({ header: 'h3' });
 }

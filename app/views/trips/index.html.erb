@@ -1,9 +1,15 @@
-<style>
-	#feedback { font-size: 1.4em; }
-	#selectable .ui-selecting { background: #FECA40; }
-	#selectable .ui-selected { background: #F39814; color: white; }
-	#selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-	#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+        <style>        
+        .tripsheader { padding-top: 20px; padding-left: 50px; width:645px;}
+        .tripsheadertext { font-size: 12pt; float:left;}
+        .addtrip { font-size: 10pt; float:right;}
+   
+        .usertripsheader { font-size: 10pt; padding-top: 10px; padding-left: 50px; width:670px; clear:right;}
+        .usertripsheadercell { width:50px; font-size: 10pt; border: 1px solid #9A9A9A; background: #99b27f; float:left; padding:5px}
+        
+        .usertripslist { font-size: 10pt; padding-left: 50px; width:670px; clear:left}        
+        .usertripitemlist { font-size: 10pt;}
+        .usertripitem {border: 1px solid #9A9A9A; display:inline; float:left; padding:5px;}
+
 	</style>
 
 <script type="text/javascript">
@@ -15,17 +21,29 @@
     <%= render :partial => "layouts/leftnav" %>
 </div>
 <div id='rightframe' class='homerightframe'>
-        <h1>Listing trips</h1>
-
-        <ol id="selectable">
-          <% @trips.each do |trip| %>         
-                <li class="ui-widget-content"><%= trip.id %></li>        
-          <% end %>
-        </ol>      
-
-        <br />
-
-        <%= link_to 'New Trip', new_trip_path %>
+        <div class="tripsheader">
+          <div class="tripsheadertext">Your Trips</div>
+          <div class="addtrip"><%= link_to 'New Trip', new_trip_path %></div>
+        </div> 
+        
+          <div class='usertripsheader'>
+            <div class='usertripsheadercell' style="width:75px">Name</div>
+            <div class='usertripsheadercell' style="width:75px">Date</div>
+            <div class='usertripsheadercell' style="width:225px">Origin</div>
+            <div class='usertripsheadercell' style="width:225px;">Destination</div>
+          </div>
+          <div class="usertripslist">
+          <% @trips.each do |trip| %>
+            <div class="usertripitemlist">
+                  <div class='usertripitem' style="width:75px"><%= trip.name %></div> 
+                  <div class='usertripitem' style="width:75px"><%= trip.time.strftime("%m/%d/%y") %></div>
+                  <div class="usertripitem" style="width:225px"><%= trip.origin %></div>
+                  <div class="usertripitem" style="width:225px"><%= trip.destination %> </div>
+            </div>
+          <% end %>     
+          </div>  
+        <div style="clear:left">
+        
 
 
 </div>
