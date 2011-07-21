@@ -1,4 +1,7 @@
-body { font-family: sans-serif; font-size:10pt; margin: 5px 5px;}
+/* Generic */
+
+body   { font-family: sans-serif; font-size:10pt; margin: 5px 5px;}
+.button { background: #C8E5AA; border:1px solid #000000; color:#000000; font-weight:bold; padding:5px;}
 
 /* Banner */
 
@@ -139,7 +142,7 @@ a.footerlink:hover   {color: #9A9A9A;}
 .linkhover { color:#99b27f; text-decoration: underline; cursor: pointer; }
 
 /* Spacer */
-.spacer { padding:10px; }
+.spacer { padding:10px; clear:left; }
 
 /* Trips */
 .tripsheader { padding-top: 20px; padding-left: 50px; width:645px;}
@@ -151,5 +154,11 @@ a.footerlink:hover   {color: #9A9A9A;}
 
 .usertripslist { font-size: 10pt; padding-left: 50px; width:670px; clear:left}        
 .usertripitemlist { font-size: 10pt;}
-.usertripitem {border: 1px solid #9A9A9A; display:inline; float:left; padding:5px;}
+.usertripitem {border: 1px solid #9A9A9A; display:inline; float:left; padding:5px; white-space: nowrap;}
+#trip_error_explanation { width: 300px; border: 2px solid red; padding: 7px; padding-bottom: 0; background-color: #f0f0f0; margin:10px; margin-left:100px }
+#trip_error_explanation h2 { text-align: left; font-weight: bold; padding: 5px 5px 5px 15px; font-size: 12px; margin: -7px; margin-bottom: 0px; background-color: #c00; color: #fff; }
+
+#trip_error_explanation ul li { font-size: 12px; list-style: square; }
+.field_with_errors { display: inline; }
+#trips_form_instruct { margin: 20px; margin-left:100px }
 

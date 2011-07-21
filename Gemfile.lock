@@ -30,6 +30,8 @@ GEM
     activesupport (3.0.6)
     arel (2.0.10)
     builder (2.1.2)
+    date_validator (0.6.2)
+      activemodel (< 3.2.0, >= 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     i18n (0.5.0)
@@ -72,6 +74,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  date_validator
   jquery-rails (>= 1.0.3)
   rails (= 3.0.6)
   sqlite3

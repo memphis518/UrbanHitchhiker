@@ -6,7 +6,8 @@ mellisa:
   destination: Chico,CA
   trip_type: Driver
   name: Visiting Mellisa
-  time: 2011-06-19 12:08:55
+  start_date: <%= Date.today %>
+  start_time: 12:08:55
   comments: This is my trip to visit Mellisa
   transportation: Car
   user_id: 1000001
@@ -17,7 +18,8 @@ papa:
   destination: Austin,TX
   trip_type: Rider
   name: Visiting Ben
-  time: 2011-06-19 12:08:55
+  start_date: <%= Time.now %>
+  start_time: 12:08:55
   comments: This is a trip for Papa to visit Ben
   transportation: Bus
   user_id: 1000002

@@ -10,19 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110702023019) do
+ActiveRecord::Schema.define(:version => 20110710143524) do
 
   create_table "trips", :force => true do |t|
     t.string   "origin"
     t.string   "destination"
     t.string   "trip_type"
     t.string   "name"
-    t.datetime "time"
     t.text     "comments"
     t.string   "transportation"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "start_date"
+    t.time     "start_time"
   end
 
   create_table "users", :force => true do |t|

@@ -86,6 +86,70 @@ function setInitalLocation(map){
 	}	
 }
 
-function loadTripsJS(){
-    $("#tripsaccordion").accordion({ header: 'h3' });
+function aJaxModal(url, modalTitle, params){	
+	$.get(url, params, function(data, textStatus, jqXHR){ 
+				$("#modal").empty();
+				$("#modal").html(data);
+				$("#modal").dialog({modal:true, 
+									width:700, 
+									position:[150,75], 
+									title: modalTitle, 
+									resizable: false, 
+									close: function(event, ui) { $("#modal").empty(); }});
+	});
+	
 }
+
+function loadTripsJS(){
+	newtriplink = $("#newtriplink").attr("href");
+ 	$("#newtriplink").attr("href", "javascript:aJaxModal('" + newtriplink + "', 'New Trip')");
+    $("a[id ^= edittriplink]").each(function(index, link){
+        edittriplink = $(link).attr("href");
+        $(link).attr("href", "javascript:aJaxModal('" + edittriplink + "', 'Edit Trip')");
+    });
+	$("a[id ^= destroytriplink]").each(function(index, link){
+        destroytriplink = $(link).attr('href');
+        $(link).attr("href", "javascript:deleteTripConfirm('" + destroytriplink + "')");
+    });
+}
+
+function deleteTripConfirm(url){
+	$( "#dialog-confirm" ).dialog({
+				resizable: false,
+				height:175,
+				modal: true,
+				position:[400,175],
+				buttons: {
+					"Delete Trip": function() {
+						$.post(url, { _method: 'delete' });
+						$( this ).dialog( "close" );
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+}
+
+function loadTripFormJS(type){
+	$("#trip_start_date").datepicker();
+	var formObj;
+	if(type == 'new'){
+		formObj = $(".new_trip");
+	}else if(type == 'edit'){
+		formObj = $(".edit_trip");
+	}
+	if(formObj){
+		formObj
+		    .bind("ajax:success", function(event, data, status, xhr) {
+	            $("#modal").html(data);
+		});
+	}
+}
+
+function tripSaveSuccessful(){
+	$("#modal").empty();
+	$("#modal").dialog("close");
+	document.location = "/trips";
+}
+

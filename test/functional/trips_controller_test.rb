@@ -21,7 +21,7 @@ class TripsControllerTest < ActionController::TestCase
   def test_create_trip
     assert_difference('Trip.count') do
       post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
-                              :time =>  "2011-06-19 12:08:55", :transportation => "Car", :user_id => @bob[:id]}
+                              :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car", :user_id => @bob[:id]}
     end
 
     assert_redirected_to trip_path(assigns(:trip))

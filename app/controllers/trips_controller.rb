@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   
   before_filter :login_required
+  layout 'application', :only => [:index] 
   
   # GET /trips
   # GET /trips.xml
@@ -52,7 +53,7 @@ class TripsController < ApplicationController
     
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to(@trip, :notice => 'Trip was successfully created.') }
+        format.html { render(:partial => 'save_successful', :layout => false) }
         format.xml  { render :xml => @trip, :status => :created, :location => @trip }
       else
         format.html { render :action => "new" }
@@ -68,7 +69,7 @@ class TripsController < ApplicationController
     if(@trip.user_id == session[:user_id])
       respond_to do |format|
         if @trip.update_attributes(params[:trip])
-          format.html { redirect_to(@trip, :notice => 'Trip was successfully updated.') }
+          format.html { render(:partial => 'save_successful', :layout => false) }
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }

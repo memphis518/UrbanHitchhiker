@@ -8,27 +8,32 @@
 <div id='rightframe' class='homerightframe'>
         <div class="tripsheader">
           <div class="tripsheadertext">Your Trips</div>
-          <div class="addtrip"><%= link_to 'New Trip', new_trip_path %></div>
+          <div class="addtrip"><%= link_to 'New Trip', new_trip_path, :id => 'newtriplink' %></div>
         </div> 
         
           <div class='usertripsheader'>
-            <div class='usertripsheadercell' style="width:75px">Name</div>
-            <div class='usertripsheadercell' style="width:75px">Date</div>
-            <div class='usertripsheadercell' style="width:225px">Origin</div>
-            <div class='usertripsheadercell' style="width:225px;">Destination</div>
+            <div class='usertripsheadercell' style="width:140px">Name</div>
+            <div class='usertripsheadercell' style="width:60px">Date</div>
+            <div class='usertripsheadercell' style="width:190px">Origin</div>
+            <div class='usertripsheadercell' style="width:190px;">Destination</div>
+            <div class='usertripsheadercell' style="width:20px;">&nbsp;</div>
           </div>
           <div class="usertripslist">
           <% @trips.each do |trip| %>
             <div class="usertripitemlist">
-                  <div class='usertripitem' style="width:75px"><%= trip.name %></div> 
-                  <div class='usertripitem' style="width:75px"><%= trip.time.strftime("%m/%d/%y") %></div>
-                  <div class="usertripitem" style="width:225px"><%= trip.origin %></div>
-                  <div class="usertripitem" style="width:225px"><%= trip.destination %> </div>
+                  <div class='usertripitem' style="width:140px" title='<%= trip.name %>'><%= trip.name.length > 20 ? trip.name[0,19] + "..." : trip.name %></div> 
+                  <div class='usertripitem' style="width:60px"><%= trip.start_date.strftime("%m/%d/%y") %></div>
+                  <div class="usertripitem" style="width:190px"><%= trip.origin %></div>
+                  <div class="usertripitem" style="width:190px"><%= trip.destination %> </div>
+                  <div class="usertripitem" style="width:20px">
+                    <%= link_to 'E', edit_trip_path(trip.id), :id => 'edittriplink[' + trip.id.to_s + ']' %>
+					<%= link_to 'D', trip_path(trip.id), :method => :delete, :id => 'destroytriplink[' + trip.id.to_s + ']'%>
+                 </div>
             </div>
           <% end %>     
           </div>  
-        <div style="clear:left">
-        
-
-
+          <div class='spacer'></div>
+		  <div id="dialog-confirm" title="Delete Trip" style='display:none;'>
+			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This will delete your trip.  Are your sure?</p>
+		</div>
 </div>
