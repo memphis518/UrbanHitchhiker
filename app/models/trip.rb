@@ -20,41 +20,34 @@ class Trip < ActiveRecord::Base
 
   # When saving origin, it needs to find the lng and lat of the address
   def origin=(originAddress)
-    write_attribute(:origin, originAddress);
-    begin
-      result = getGeoCodeData(originAddress)
-      if(result["status"] == 'OK')
-        write_attribute(:origin_longitude , result["results"][0]["geometry"]["location"]["lng"].to_f)
-        write_attribute(:origin_latitude , result["results"][0]["geometry"]["location"]["lat"].to_f)
-      elsif(result["status"] == 'ZERO_RESULTS')
-        @origin_api_error = "is an invalid address"
-      else
-        @origin_api_error = "had an error validating your address. Please try again."
-      end
-    rescue Exception => e
-      logger.debug(e.message)
-      logger.debug(e.backtrace.inspect)
-      @origin_api_error = "had an error validating your address. Please try again."
-    end
+    write_attribute(:origin, originAddress)
+    setAttrLatLng("origin", originAddress)
   end
 
   # When saving destination, it needs to find the lng and lat of the address
   def destination=(destinationAddress)
-    write_attribute(:destination, destinationAddress);
+    write_attribute(:destination, destinationAddress)
+    setAttrLatLng("destination", destinationAddress)
+  end
+
+  def setAttrLatLng(field, address)
     begin
-      result = getGeoCodeData(destinationAddress)
+      if(!@api_error)
+        @api_error = {}
+      end
+      result = getGeoCodeData(address)
       if(result["status"] == 'OK')
-        write_attribute(:destination_longitude , result["results"][0]["geometry"]["location"]["lng"].to_f)
-        write_attribute(:destination_latitude , result["results"][0]["geometry"]["location"]["lat"].to_f)
+        write_attribute(field + "_longitude" , result["results"][0]["geometry"]["location"]["lng"].to_f)
+        write_attribute(field + "_latitude", result["results"][0]["geometry"]["location"]["lat"].to_f)
       elsif(result["status"] == 'ZERO_RESULTS')
-        @destination_api_error = "is an invalid address"
+        @api_error[field] = "is an invalid address"
       else
-        @destination_api_error = "had an error validating your address. Please try again."
+        @api_error[field] = "had an error validating your address. Please try again."
       end
     rescue Exception => e
       logger.debug(e.message)
       logger.debug(e.backtrace.inspect)
-      @destination_api_error = "had an error validating your address. Please try again."
+      @api_error[field] = "had an error validating your address. Please try again."
     end
   end
 
@@ -71,12 +64,12 @@ class Trip < ActiveRecord::Base
 
   # This takes any errors calling the Geocoder API to the normal validators
   def api_validate
-    if(defined? @origin_api_error)
-      self.errors.add("origin", @origin_api_error)
+    if(@api_error["origin"])
+      self.errors.add("origin", @api_error["origin"])
     end
 
-    if(defined? @destination_api_error)
-      self.errors.add("destination", @destination_api_error)
+    if(@api_error["destination"])
+      self.errors.add("destination", @api_error["destination"])
     end
   end
 
