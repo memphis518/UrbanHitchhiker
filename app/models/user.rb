@@ -32,5 +32,5 @@ class User < ActiveRecord::Base
     return u if Digest::SHA1.hexdigest(pass)==u.hashed_password
     nil
   end 
-  
+    
 end

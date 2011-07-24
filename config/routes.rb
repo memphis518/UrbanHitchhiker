@@ -5,6 +5,8 @@ UrbanHitchHiker::Application.routes.draw do
   resources :users, :only => [:new, :create, :edit, :update]
   
   resources :trips
+
+  match 'trips/:id/map' => 'trips#map'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

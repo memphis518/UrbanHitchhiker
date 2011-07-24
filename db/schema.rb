@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110710143524) do
+ActiveRecord::Schema.define(:version => 20110723235248) do
 
   create_table "trips", :force => true do |t|
     t.string   "origin"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(:version => 20110710143524) do
     t.datetime "updated_at"
     t.date     "start_date"
     t.time     "start_time"
+    t.decimal  "origin_longitude"
+    t.decimal  "origin_latitude"
+    t.decimal  "destination_longitude"
+    t.decimal  "destination_latitude"
   end
 
   create_table "users", :force => true do |t|

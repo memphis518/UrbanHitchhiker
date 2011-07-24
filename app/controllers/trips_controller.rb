@@ -96,4 +96,13 @@ class TripsController < ApplicationController
       render :template => 'users/loginfailed'
     end
   end
+
+  # GET /trips/1/map
+  def map
+     @trip = Trip.find(params[:id])
+     if(@trip.user_id == session[:user_id])
+        
+     end 
+  end  
+
 end

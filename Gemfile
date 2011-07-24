@@ -8,6 +8,7 @@ gem 'rails', '3.0.6'
 gem 'sqlite3'
 gem 'jquery-rails', '>= 1.0.3'
 gem 'date_validator'
+gem 'json'
 # Use unicorn as the web server
 # gem 'unicorn'
 

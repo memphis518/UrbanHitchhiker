@@ -53,6 +53,23 @@ class TripTest < ActiveSupport::TestCase
     
   end
   
+  def test_valid_addresses
+     t = Trip.new( :origin => "Austin,TX", :destination => "asdfasdf", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car", :user_id => @bob[:id]);
+    assert !t.save     
+    assert t.errors.any?
+
+     t = Trip.new( :origin => "asdfasdfasdf", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car", :user_id => @bob[:id]);
+    assert !t.save     
+    assert t.errors.any?
+
+     t = Trip.new( :origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car", :user_id => @bob[:id]);
+    assert t.save     
+    assert !t.errors.any?
+  end
+
   def test_past_date
      t = Trip.new( :origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
                     :start_date => 1929-10-11, :start_time =>  "12:08:55", :transportation => "Car", :user_id => @bob[:id]);

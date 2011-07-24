@@ -145,14 +145,14 @@ a.footerlink:hover   {color: #9A9A9A;}
 .spacer { padding:10px; clear:left; }
 
 /* Trips */
-.tripsheader { padding-top: 20px; padding-left: 50px; width:645px;}
+.tripsheader { padding-top: 20px; padding-left: 50px; width:665px;}
 .tripsheadertext { font-size: 12pt; float:left;}
 .addtrip { font-size: 10pt; float:right;}
 
-.usertripsheader { font-size: 10pt; padding-top: 10px; padding-left: 50px; width:670px; clear:right;}
+.usertripsheader { font-size: 10pt; padding-top: 10px; padding-left: 50px; width:680px; clear:right;}
 .usertripsheadercell { width:50px; font-size: 10pt; border: 1px solid #9A9A9A; background: #99b27f; float:left; padding:5px}
 
-.usertripslist { font-size: 10pt; padding-left: 50px; width:670px; clear:left}        
+.usertripslist { font-size: 10pt; padding-left: 50px; width:680px; clear:left}        
 .usertripitemlist { font-size: 10pt;}
 .usertripitem {border: 1px solid #9A9A9A; display:inline; float:left; padding:5px; white-space: nowrap;}
 #trip_error_explanation { width: 300px; border: 2px solid red; padding: 7px; padding-bottom: 0; background-color: #f0f0f0; margin:10px; margin-left:100px }

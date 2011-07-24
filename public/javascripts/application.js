@@ -101,7 +101,7 @@ function aJaxModal(url, modalTitle, params){
 }
 
 function loadTripsJS(){
-	newtriplink = $("#newtriplink").attr("href");
+    newtriplink = $("#newtriplink").attr("href");
  	$("#newtriplink").attr("href", "javascript:aJaxModal('" + newtriplink + "', 'New Trip')");
     $("a[id ^= edittriplink]").each(function(index, link){
         edittriplink = $(link).attr("href");
