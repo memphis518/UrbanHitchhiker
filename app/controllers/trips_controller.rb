@@ -101,7 +101,7 @@ class TripsController < ApplicationController
   def map
      @trip = Trip.find(params[:id])
      if(@trip.user_id == session[:user_id])
-        
+         render :template => 'trips/map'      
      end 
   end  
 

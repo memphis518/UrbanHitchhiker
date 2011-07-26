@@ -46,46 +46,6 @@ function signUp(){
         document.location = "/users/new";
 }
 
-function setInitalLocation(map){
-	var siberia = new google.maps.LatLng(60, 105);
-	var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
-	var browserSupportFlag =  new Boolean();
-	
-	// Try W3C Geolocation (Preferred)
-	if(navigator.geolocation) {
-		browserSupportFlag = true;
-		navigator.geolocation.getCurrentPosition(function(position) {
-			initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-			map.setCenter(initialLocation);
-		}, function() {
-			handleNoGeolocation(browserSupportFlag);
-		});
-		// Try Google Gears Geolocation
-	} else if (google.gears) {
-		browserSupportFlag = true;
-		var geo = google.gears.factory.create('beta.geolocation');
-		geo.getCurrentPosition(function(position) {
-			initialLocation = new google.maps.LatLng(position.latitude,position.longitude);
-			map.setCenter(initialLocation);
-		}, function() {
-			handleNoGeoLocation(browserSupportFlag);
-		});
-		// Browser doesn't support Geolocation
-	} else {
-		browserSupportFlag = false;
-		handleNoGeolocation(browserSupportFlag);
-	}
-
-	function handleNoGeolocation(errorFlag) {
-		if (errorFlag == true) {
-			initialLocation = newyork;
-		} else {
-			initialLocation = siberia;
-		}
-		map.setCenter(initialLocation);
-	}	
-}
-
 function aJaxModal(url, modalTitle, params){	
 	$.get(url, params, function(data, textStatus, jqXHR){ 
 				$("#modal").empty();
@@ -95,7 +55,8 @@ function aJaxModal(url, modalTitle, params){
 									position:[150,75], 
 									title: modalTitle, 
 									resizable: false, 
-									close: function(event, ui) { $("#modal").empty(); }});
+									close: function(event, ui) { $("#modal").empty(); }
+								});
 	});
 	
 }
@@ -110,6 +71,10 @@ function loadTripsJS(){
 	$("a[id ^= destroytriplink]").each(function(index, link){
         destroytriplink = $(link).attr('href');
         $(link).attr("href", "javascript:deleteTripConfirm('" + destroytriplink + "')");
+    });
+    $("a[id ^= maptriplink]").each(function(index, link){
+        maptriplink = $(link).attr('href');
+        $(link).attr("href", "javascript:aJaxModal('" + maptriplink + "', 'Trip Map')");
     });
 }
 
@@ -153,3 +118,33 @@ function tripSaveSuccessful(){
 	document.location = "/trips";
 }
 
+function loadTripMap(origin_lat, origin_lng, destination_lat, destination_lng){
+	if(!$('#map').is(":visible")){
+		setTimeout(function(){loadTripMap(origin_lat, origin_lng, destination_lat, destination_lng)},5);
+	}else{
+		var origin = new google.maps.LatLng(origin_lat, origin_lng);
+		var destination = new google.maps.LatLng(destination_lat, destination_lng);
+
+		var mapOptions = {
+				zoom: 8,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				center: origin
+		};
+
+		var map = new google.maps.Map($('#map').get(0), mapOptions);
+		var directionsService = new google.maps.DirectionsService();
+		var directionsDisplay = new google.maps.DirectionsRenderer();
+		directionsDisplay.setMap(map);
+
+		var request = {
+		  origin:origin,
+		  destination:destination,
+		  travelMode: google.maps.TravelMode.DRIVING
+		};
+		directionsService.route(request, function(result, status) {
+		  if (status == google.maps.DirectionsStatus.OK) {
+		    directionsDisplay.setDirections(result);
+		  }
+		});
+	}
+}	
