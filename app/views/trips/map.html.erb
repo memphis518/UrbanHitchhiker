@@ -1,0 +1,5 @@
+<script type="text/javascript">
+    $(document).ready(function(){ loadTripMap(<%= @trip.origin_latitude %>, <%= @trip.origin_longitude %>,<%= @trip.destination_latitude %>, <%= @trip.destination_longitude %>) });  
+</script>
+
+<div id='map' style="height:400px;"></div>
