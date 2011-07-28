@@ -21,10 +21,49 @@ class TripsControllerTest < ActionController::TestCase
   def test_create_trip
     assert_difference('Trip.count') do
       post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
-                              :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car", :user_id => @bob[:id]}
+                              :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car"}
     end
 
-    assert_redirected_to trip_path(assigns(:trip))
+    assert_response :success
+  end
+
+  def test_bad_create
+     post :create, :trip => {:destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today, :start_time =>  "12:08:55", :transportation => "Car"}
+     assert_response :success
+     assert_template "trips/new"
+     post :create, :trip => {:origin => "Austin,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today , :start_time =>  "12:08:55", :transportation => "Car"}
+     assert_response :success
+     assert_template "trips/new"
+     post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today , :start_time =>  "12:08:55", :transportation => "Car"}
+     assert_response :success
+     assert_template "trips/new"
+     post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :comments => "Test Trip",
+                  :start_date => Date.today , :start_time =>  "12:08:55", :transportation => "Car"}
+     assert_response :success
+     assert_template "trips/new"
+     post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today , :transportation => "Car"}
+     assert_response :success
+     assert_template "trips/new"
+     post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today , :start_time =>  "12:08:55"}
+     assert_response :success
+     assert_template "trips/new"
+     post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_time =>  Date.today , :transportation => "Car"}
+     assert_response :success
+     assert_template "trips/new"
+    
+  end  
+
+  def test_not_logged_in    
+     session[:user_id] = nil    
+     post :create, :trip => {:origin => "Austin,TX", :destination => "Dallas,TX", :trip_type => "Driver", :name => "Austin To Dallas", :comments => "Test Trip",
+                  :start_date => Date.today , :start_time =>  "12:08:55", :transportation => "Car"} 
+     assert_redirected_to :controller=>'users', :action=>'login'
   end
 
   def test_show_trip
@@ -39,7 +78,7 @@ class TripsControllerTest < ActionController::TestCase
 
   def test_update_trip
     put :update, :id => @mellisa[:id], :trip => @mellisa
-    assert_redirected_to trip_path(assigns(:trip))
+    assert_response :success
   end
 
   def test_destroy_trip
@@ -49,4 +88,11 @@ class TripsControllerTest < ActionController::TestCase
 
     assert_redirected_to trips_path
   end
+
+  def test_map_trip
+    get :map, :id => @mellisa[:id]
+    assert_response :success
+    assert_template "trips/map"
+  end
+
 end

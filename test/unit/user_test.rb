@@ -98,6 +98,16 @@ class UserTest < ActiveSupport::TestCase
     u.username = "okbob"
     assert u.save  
     assert u.errors.empty?
+
+  end
+
+  def test_bad_emails
+    u = User.new  
+    u.password = u.password_confirmation = "bobs_secure_password"
+    u.firstname = "ok"
+    u.lastname = "bob"
+    u.username = 'bobuser
+    '
     #no email
     u.email=nil   
     assert !u.save     
@@ -110,8 +120,7 @@ class UserTest < ActiveSupport::TestCase
     u.email="validbob@mcbob.com"
     assert u.save  
     assert u.errors.empty?
-  end
-
+  end 
 
   def test_collision
     #check can't create new user with existing username

@@ -13,7 +13,7 @@ class Trip < ActiveRecord::Base
   validates :start_time,          :presence => true
   validates :transportation,:presence => true
   validates :user_id,       :presence => true
-  validate :api_validate
+  validate  :api_validate
   belongs_to :user
   
   attr_protected :id
@@ -64,12 +64,14 @@ class Trip < ActiveRecord::Base
 
   # This takes any errors calling the Geocoder API to the normal validators
   def api_validate
-    if(@api_error["origin"])
-      self.errors.add("origin", @api_error["origin"])
-    end
+    if(@api_error)
+      if(@api_error["origin"])
+        self.errors.add("origin", @api_error["origin"])
+      end
 
-    if(@api_error["destination"])
-      self.errors.add("destination", @api_error["destination"])
+      if(@api_error["destination"])
+        self.errors.add("destination", @api_error["destination"])
+      end
     end
   end
 
