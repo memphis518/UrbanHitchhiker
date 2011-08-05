@@ -105,4 +105,14 @@ class TripsController < ApplicationController
      end 
   end  
 
+  # POST /trips/1/matches
+  def matches
+     @trip = Trip.find(params[:id])
+     if(@trip.user_id == session[:user_id])
+          matches = Trip.getMatchesByBounds(ActiveSupport::JSON.decode(params[:bounds]));
+          render :json => matches     
+     end 
+  end 
+
+
 end

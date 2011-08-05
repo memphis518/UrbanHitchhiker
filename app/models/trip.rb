@@ -56,9 +56,7 @@ class Trip < ActiveRecord::Base
     url = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=' + URI.encode(address)
     resp = Net::HTTP.get_response(URI.parse(url))
     data = resp.body
-    logger.debug(data)
     result = JSON.parse(data)
-    logger.debug(data)
     return result
   end
 
@@ -75,4 +73,10 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def self.getMatchesByBounds(bounds) 
+        return where('origin_latitude >= ? AND origin_longitude >= ? AND ' +
+                          'origin_latitude <= ? AND origin_longitude <= ?', 
+                           bounds["sw"]["lat"], bounds["sw"]["lng"],
+                           bounds["ne"]["lat"], bounds["ne"]["lng"])
+  end
 end

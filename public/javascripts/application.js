@@ -118,9 +118,9 @@ function tripSaveSuccessful(){
 	document.location = "/trips";
 }
 
-function loadTripMap(origin_lat, origin_lng, destination_lat, destination_lng){
-	if(!$('#map').is(":visible")){
-		setTimeout(function(){loadTripMap(origin_lat, origin_lng, destination_lat, destination_lng)},5);
+function loadTripMap(trip_id, origin_lat, origin_lng, destination_lat, destination_lng){
+    if(!$('#map').is(":visible")){
+		setTimeout(function(){loadTripMap(trip_id,origin_lat, origin_lng, destination_lat, destination_lng)},5);
 	}else{
 		var origin = new google.maps.LatLng(origin_lat, origin_lng);
 		var destination = new google.maps.LatLng(destination_lat, destination_lng);
@@ -142,9 +142,40 @@ function loadTripMap(origin_lat, origin_lng, destination_lat, destination_lng){
 		  travelMode: google.maps.TravelMode.DRIVING
 		};
 		directionsService.route(request, function(result, status) {
-		  if (status == google.maps.DirectionsStatus.OK) {
-		    directionsDisplay.setDirections(result);
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(result);
+            getTripMatches(trip_id, map);
 		  }
 		});
+
+
 	}
-}	
+}
+
+function getTripMatches(trip_id, map){
+   var bounds = map.getBounds();
+   var ne = bounds.getNorthEast();
+   var sw = bounds.getSouthWest();
+   var boundsHash = new Object();
+   boundsHash = {sw: { lat: sw.lat(), lng: sw.lng() }, 
+                 ne: { lat: ne.lat(), lng: ne.lng() }};
+    
+   boundsJSON = JSON.stringify(boundsHash);
+   $.post('/trips/' + trip_id + '/matches',
+          {bounds: boundsJSON},
+          function(data){displayTripMatches(data,map);});
+}
+
+function displayTripMatches(jsonMatches,map){
+       for(i = 0; i < jsonMatches.length; i++){
+            trip = jsonMatches[i]['trip'];
+            var origin = new google.maps.LatLng(trip['origin_latitude'], trip['origin_longitude']);
+            var marker = new google.maps.Marker({
+                    map:map,
+                    animation: google.maps.Animation.DROP,
+                    position: origin
+                  });
+        } 
+    
+}
+	
