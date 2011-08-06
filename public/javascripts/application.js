@@ -132,7 +132,12 @@ function loadTripMap(trip_id, origin_lat, origin_lng, destination_lat, destinati
 		};
 
 		var map = new google.maps.Map($('#map').get(0), mapOptions);
-		var directionsService = new google.maps.DirectionsService();
+		
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+                getTripMatches(trip_id, map);
+        });
+
+        var directionsService = new google.maps.DirectionsService();
 		var directionsDisplay = new google.maps.DirectionsRenderer();
 		directionsDisplay.setMap(map);
 
@@ -144,7 +149,6 @@ function loadTripMap(trip_id, origin_lat, origin_lng, destination_lat, destinati
 		directionsService.route(request, function(result, status) {
           if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(result);
-            getTripMatches(trip_id, map);
 		  }
 		});
 
