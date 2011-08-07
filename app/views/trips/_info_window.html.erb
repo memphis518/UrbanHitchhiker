@@ -1,0 +1,17 @@
+<div id='content'>
+   <h3><%= match[:name] %></h3>
+   <div>
+        <span>Origin:</span><span><%= match[:origin] %></span>
+   </div>
+   <div>
+        <span>Destination:</span><span><%= match[:destination] %></span>
+   </div>
+   <div>
+        <span>Time:</span>
+        <span><%= match[:start_date].strftime("%m/%d/%Y") %> <%= match[:start_time].strftime("%I:%M%p") %></span>
+   </div>
+   <div>
+        <span>Comments:</span><span><%= match[:comments] %></span>
+   </div>
+   <div>
+</div>
