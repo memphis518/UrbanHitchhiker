@@ -133,7 +133,7 @@ function loadTripMap(trip_id, origin_lat, origin_lng, destination_lat, destinati
 
 		var map = new google.maps.Map($('#map').get(0), mapOptions);
 		
-        google.maps.event.addListener(map, 'zoom_changed', function() {
+        google.maps.event.addListener(map, 'bounds_changed', function() {
                 getTripMatches(trip_id, map);
         });
 

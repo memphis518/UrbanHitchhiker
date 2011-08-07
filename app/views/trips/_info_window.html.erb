@@ -1,26 +1,34 @@
 <div id='content'>
    <h3><%= match[:name] %></h3>
-   <div>
-        <span>User:</span><span><%= match[:username] %></span>
+   <div class='infowindow_line'>
+        <div class='infowindow_label'>User:</div>
+        <div class='infowindow_value'><%= match[:username] %></div>
    </div>
-   <div>
-        <span>Origin:</span><span><%= match[:origin] %></span>
+   <div class='infowindow_line'>
+        <div class='infowindow_label'>Origin:</div>
+        <div class='infowindow_value'><%= match[:origin] %></div>
    </div>
-   <div>
-        <span>Destination:</span><span><%= match[:destination] %></span>
+   <div class='infowindow_line'>
+        <div class='infowindow_label'>Destination:</div>
+        <div class='infowindow_value'><%= match[:destination] %></div>
    </div>
-   <div>
-        <span>Trip Type:</span><span><%= match[:trip_type] %></span>
+   <div class='infowindow_line'>
+        <div class='infowindow_label'>Trip Type:</div>
+        <div class='infowindow_value'><%= match[:trip_type] %></div>
    </div>
-    <div>
-        <span>Transportation:</span><span><%= match[:transportation] %></span>
+    <div class='infowindow_line'>
+        <div class='infowindow_label'>Transportation:</div>
+        <div class='infowindow_value'><%= match[:transportation] %></div>
    </div>
-   <div>
-        <span>Time:</span>
-        <span><%= match[:start_date].strftime("%m/%d/%Y") %> <%= match[:start_time].strftime("%I:%M%p") %></span>
+   <div class='infowindow_line'>
+        <div class='infowindow_label'>Time:</div>
+        <div class='infowindow_value'><%= match[:start_date].strftime("%m/%d/%Y") %> <%= match[:start_time].strftime("%I:%M%p") %></div>
    </div>
-   <div>
-        <span>Comments:</span><span><%= match[:comments] %></span>
+   <div class='infowindow_line'>
+        <div class='infowindow_label'>Comments:</div>
+   </div>
+   <div class='infowindow_line'>
+         <div class='infowindow_value'><%= match[:comments] %></div>
    </div>
    <div>
 </div>

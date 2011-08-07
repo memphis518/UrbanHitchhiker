@@ -162,3 +162,6 @@ a.footerlink:hover   {color: #9A9A9A;}
 .field_with_errors { display: inline; }
 #trips_form_instruct { margin: 20px; margin-left:100px }
 
+.infowindow_label{ font-size: 10pt; font-weight: bold; width: 110px; display:inline; float:left; }
+.infowindow_value{ font-size: 10pt; display:inline; float:right;}
+.infowindow_line{ clear:left; }
