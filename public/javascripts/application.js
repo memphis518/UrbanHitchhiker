@@ -149,7 +149,8 @@ function loadTripMap(trip_id, origin_lat, origin_lng, destination_lat, destinati
 		directionsService.route(request, function(result, status) {
           if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(result);
-		  }
+		    getTripMatches(trip_id, map);
+          }
 		});
 
 
@@ -171,15 +172,30 @@ function getTripMatches(trip_id, map){
 }
 
 function displayTripMatches(jsonMatches,map){
-       for(i = 0; i < jsonMatches.length; i++){
-            trip = jsonMatches[i]['trip'];
-            var origin = new google.maps.LatLng(trip['origin_latitude'], trip['origin_longitude']);
-            var marker = new google.maps.Marker({
-                    map:map,
-                    animation: google.maps.Animation.DROP,
-                    position: origin
-                  });
-        } 
+    var infowindow = new google.maps.InfoWindow();
     
+    for(i = 0; i < jsonMatches.length; i++){
+            trip = jsonMatches[i]['trip'];
+    
+            createTripMatchMarker(trip,map,infowindow);
+    } 
 }
+
+
+function createTripMatchMarker(trip,map, infowindow){
+    var origin = new google.maps.LatLng(trip['origin_latitude'], trip['origin_longitude']);
+
+    var marker = new google.maps.Marker({
+            map:map,
+            animation: google.maps.Animation.DROP,
+            position: origin
+    });
+
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(trip['infowindow']);
+        infowindow.open(map,this); 
+    });
+}
+
 	
