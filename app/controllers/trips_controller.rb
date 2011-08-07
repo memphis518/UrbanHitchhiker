@@ -111,8 +111,7 @@ class TripsController < ApplicationController
      if(@trip.user_id == session[:user_id])
           matches = Trip.getMatchesByBounds(ActiveSupport::JSON.decode(params[:bounds]));
           matches.each { |match| match[:infowindow] = render_to_string :partial => 'info_window', 
-                                                                       :locals => { :match => match } 
-                       }
+                                                                       :locals => { :match => match } }
           render :json => matches     
      end 
   end 

@@ -1,10 +1,19 @@
 <div id='content'>
    <h3><%= match[:name] %></h3>
    <div>
+        <span>User:</span><span><%= match[:username] %></span>
+   </div>
+   <div>
         <span>Origin:</span><span><%= match[:origin] %></span>
    </div>
    <div>
         <span>Destination:</span><span><%= match[:destination] %></span>
+   </div>
+   <div>
+        <span>Trip Type:</span><span><%= match[:trip_type] %></span>
+   </div>
+    <div>
+        <span>Transportation:</span><span><%= match[:transportation] %></span>
    </div>
    <div>
         <span>Time:</span>

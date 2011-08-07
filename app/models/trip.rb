@@ -74,9 +74,10 @@ class Trip < ActiveRecord::Base
   end
 
   def self.getMatchesByBounds(bounds) 
-        return where('origin_latitude >= ? AND origin_longitude >= ? AND ' +
+        matches = includes(:user).where('origin_latitude >= ? AND origin_longitude >= ? AND ' +
                           'origin_latitude <= ? AND origin_longitude <= ?', 
                            bounds["sw"]["lat"], bounds["sw"]["lng"],
                            bounds["ne"]["lat"], bounds["ne"]["lng"])
+        matches.each{ |match| match[:username] = match.user.username }
   end
 end
