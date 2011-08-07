@@ -163,5 +163,6 @@ a.footerlink:hover   {color: #9A9A9A;}
 #trips_form_instruct { margin: 20px; margin-left:100px }
 
 .infowindow_label{ font-size: 10pt; font-weight: bold; width: 110px; display:inline; float:left; }
-.infowindow_value{ font-size: 10pt; display:inline; float:right;}
+.infowindow_value{ font-size: 10pt; display:inline; float:right; padding-right:10px;}
+.infowindow_comments{ font-size: 10pt; width: 300px; display:inline; float:left; word-wrap:break-word; }
 .infowindow_line{ clear:left; }

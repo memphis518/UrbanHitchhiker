@@ -95,4 +95,33 @@ class TripsControllerTest < ActionController::TestCase
     assert_template "trips/map"
   end
 
+  def test_trip_matches
+    bounds = {
+            'sw' => { 'lat' => 26.267337852178457,
+                      'lng' => -124.72298531249999},
+            'ne' => { 'lat' => 40.841681270139176,
+                      'lng' => -95.10384468749999}
+    }
+    boundsJSON = ActiveSupport::JSON.encode(bounds);
+    post :matches, :id => @mellisa[:id], :bounds => boundsJSON 
+    assert_response :success
+    matches = ActiveSupport::JSON.decode(@response.body)
+    found_match   = false;
+    found_nomatch = false;
+    found_mellisa = false;
+    matches.each { |match|
+        if(match['trip']['id'] == @mellisaMatch[:id])
+            found_match = true
+        elsif(match['trip']['id'] == @mellisaNoMatch[:id])
+            found_nomatch = true
+        elsif(match['trip']['id'] == @mellisa[:id])
+            found_mellisa = true
+        end
+    }
+
+    assert found_match
+    assert !found_nomatch
+    assert !found_mellisa
+  end
+
 end

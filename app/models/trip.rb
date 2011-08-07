@@ -30,6 +30,7 @@ class Trip < ActiveRecord::Base
     setAttrLatLng("destination", destinationAddress)
   end
 
+  # set the Lat and Lng attribues by getting them from the Google GeoCoder API
   def setAttrLatLng(field, address)
     begin
       if(!@api_error)
@@ -73,11 +74,15 @@ class Trip < ActiveRecord::Base
     end
   end
 
-  def self.getMatchesByBounds(bounds) 
+
+  # Get Trips That will Match the Lat and Lng Bounds
+  def self.getMatchesByBounds(bounds, user_id) 
         matches = includes(:user).where('origin_latitude >= ? AND origin_longitude >= ? AND ' +
-                          'origin_latitude <= ? AND origin_longitude <= ?', 
+                          'origin_latitude <= ? AND origin_longitude <= ? AND ' +
+                          'user_id != ?' , 
                            bounds["sw"]["lat"], bounds["sw"]["lng"],
-                           bounds["ne"]["lat"], bounds["ne"]["lng"])
+                           bounds["ne"]["lat"], bounds["ne"]["lng"],
+                           user_id )
         matches.each{ |match| match[:username] = match.user.username }
   end
 end

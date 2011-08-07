@@ -89,5 +89,18 @@ class TripTest < ActiveSupport::TestCase
     assert_not_equal 999999, t.id
     assert_equal "Dallas,TX", t.origin
   end
-  
+
+  def test_getmatchesbybounds
+       bounds = {
+            'sw' => { 'lat' => 26.267337852178457,
+                      'lng' => -124.72298531249999},
+            'ne' => { 'lat' => 40.841681270139176,
+                      'lng' => -95.10384468749999}
+       }
+       matches = Trip.getMatchesByBounds(bounds, @mellisa[:user_id]);
+       assert (matches.include? @mellisaMatch)
+       assert (!matches.include? @mellisaNoMatch)
+       assert (!matches.include? @mellisa)
+  end
+ 
 end
