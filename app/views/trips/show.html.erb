@@ -1,55 +1,33 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Trip -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Id:</b>
-  <%= @trip.id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:origin) %>:</strong></dt>
+  <dd><%= @trip.origin.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:destination) %>:</strong></dt>
+  <dd><%= @trip.destination.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:trip_type) %>:</strong></dt>
+  <dd><%= @trip.trip_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @trip.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:start_datetime) %>:</strong></dt>
+  <dd><%= @trip.start_datetime %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:transportation) %>:</strong></dt>
+  <dd><%= @trip.transportation %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @trip.user.email %></dd>
+</dl>
 
-<p>
-  <b>Origin:</b>
-  <%= @trip.origin %>
-</p>
-
-<p>
-  <b>Destination:</b>
-  <%= @trip.destination %>
-</p>
-
-<p>
-  <b>Type:</b>
-  <%= @trip.trip_type %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @trip.name %>
-</p>
-
-<p>
-  <b>Date:</b>
-  <%= @trip.start_date %>
-</p>
-
-<p>
-  <b>Time:</b>
-  <%= @trip.start_time %>
-</p>
-
-<p>
-  <b>Comments:</b>
-  <%= @trip.comments %>
-</p>
-
-<p>
-  <b>Transportation:</b>
-  <%= @trip.transportation %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @trip.user %>
-</p>
-
-
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              trips_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_trip_path(@trip), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              trip_path(@trip),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

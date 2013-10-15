@@ -1,0 +1,26 @@
+<h2>Change your password</h2>
+
+<% if @user.errors.any? %>
+    <div id="errors" class="alert alert-error fade in">
+      <button class="close" data-dismiss="alert" type="button">×</button>
+      <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </div>
+<% end %>
+
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+
+  <%= f.hidden_field :reset_password_token %>
+
+  <br/>
+  <%= f.password_field :password, :class => 'text_field', :placeholder => 'New Password' , :autocomplete => "off"%> <i>(leave blank if you don't want to change it)</i>
+
+  <br/>
+  <%= f.password_field :password_confirmation, :class => 'text_field', :placeholder => 'Password Confirmation' , :autocomplete => "off"%>
+
+  <div><%= f.submit "Change my password",  :class => 'btn btn-primary'  %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

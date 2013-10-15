@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-UrbanHitchHiker::Application.config.secret_token = 'fe9c0936152267717fcb8a7e8310ccfbda8543c9fdaa5ba49e885891d707a3bdcd701117f82d8d56b6140dc24a9947e1f719e42943dda19895eb76a1798d41f1'
+UrbanHitchHiker::Application.config.secret_token = '7f1f15b9bbef63d055e80281d320da9fffa0942e105583db1049903cbc49ca92c7ee0dc590fbac5546299f49fcb07c6fecdadae747216f7c42c81dc371f0ec8d'
