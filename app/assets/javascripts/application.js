@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.ui.all
 //= require twitter/bootstrap
+//= require bootstrap-wysihtml5
 //= require_tree .
 
-$('.datetime').datetimepicker({dateFormat: 'yy-mm-dd ', timeFormat: 'hh:mm ', ampm: false});
+

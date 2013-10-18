@@ -17,7 +17,8 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = current_user.trips.find(params[:id])
-
+    @comment = Comment.new
+    @all_comments = @trip.comments.recent.all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @trip }

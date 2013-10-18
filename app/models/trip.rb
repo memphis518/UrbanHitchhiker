@@ -1,5 +1,7 @@
 class Trip < ActiveRecord::Base
 
+  acts_as_commentable
+
   attr_accessible :name, :start_datetime, :transportation, :trip_type, :destination_attributes, :origin_attributes
 
   enum_attr :trip_type, %w(Hitchhiker Driver)

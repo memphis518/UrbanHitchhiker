@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require jquery.ui.all
+ *= require bootstrap-wysihtml5
  *= require_tree .
  */
 

@@ -2,7 +2,9 @@ UrbanHitchHiker::Application.routes.draw do
 
   resources :profiles, :only => [:edit, :show, :update]
 
-  resources :trips
+  resources :trips do
+      resources 'comments', :only => [:create]
+  end
 
   get "home/index"
 

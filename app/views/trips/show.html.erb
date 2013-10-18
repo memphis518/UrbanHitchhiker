@@ -31,3 +31,23 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+
+<% @all_comments.each do |comm| %>
+
+    <div><%= image_tag  comm.user.profile.avatar.url, :class => 'avatar'%><%= comm.user.profile.name %></div>
+    <div><%= comm.comment.html_safe %></div>
+
+<% end %>
+
+<%= form_for [@trip, @comment], :html => { :class => 'form-horizontal' } do |f| %>
+    <div class="control-group">
+      <%= f.label :comment, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :comment, :class => 'text_field comment_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+<% end %>
