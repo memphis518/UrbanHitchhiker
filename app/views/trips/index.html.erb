@@ -11,7 +11,9 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:origin) %></th>
       <th><%= model_class.human_attribute_name(:destination) %></th>
-      <th><%= model_class.human_attribute_name(:trip_type) %></th>
+      <th><%= model_class.human_attribute_name(:total_seats) %></th>
+      <th><%= model_class.human_attribute_name(:seats_remaining) %></th>
+      <th><%= model_class.human_attribute_name(:compensation) %></th>
       <th><%= model_class.human_attribute_name(:start_datetime) %></th>
       <th><%= model_class.human_attribute_name(:transportation) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -23,7 +25,9 @@
         <td><%= trip.name %></td>
         <td><%= trip.origin.address %></td>
         <td><%= trip.destination.address %></td>
-        <td><%= trip.trip_type %></td>
+        <td><%= trip.total_seats%></td>
+        <td><%= trip.seats_remaining%></td>
+        <td><%= trip.compensation%></td>
         <td><%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P") %></td>
         <td><%= trip.transportation %></td>
         <td>

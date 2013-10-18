@@ -2,16 +2,13 @@
 
       <%= f.text_field :name, :class => 'text_field' %>
 
-      <div class='control-group'>
-        <%= f.label :trip_type, :class => 'control-label' %>
-        <div class='controls'>
-            <%= f.enum_select :trip_type %>
-        </div>
-      </div>
-
       <%= f.text_field :start_datetime, :class => 'datetime' %>
 
       <%= f.text_field :transportation, :class => 'text_field' %>
+
+      <%= f.text_field :total_seats, :class => 'text_field' %>
+
+      <%= f.text_field :compensation, :class => 'text_field' %>
 
     <%= f.fields_for :origin do |origin_form| %>
         <%= origin_form.text_field :address, :label => 'Origin', :class => 'text_field address_field origin_field'  %>

@@ -8,14 +8,18 @@
   <dd><%= @trip.origin.address %></dd>
   <dt><strong><%= model_class.human_attribute_name(:destination) %>:</strong></dt>
   <dd><%= @trip.destination.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:trip_type) %>:</strong></dt>
-  <dd><%= @trip.trip_type %></dd>
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @trip.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_datetime) %>:</strong></dt>
   <dd><%= @trip.start_datetime %></dd>
   <dt><strong><%= model_class.human_attribute_name(:transportation) %>:</strong></dt>
   <dd><%= @trip.transportation %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total_seats) %>:</strong></dt>
+  <dd><%= @trip.total_seats %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:seats_remaining) %>:</strong></dt>
+  <dd><%= @trip.seats_remaining %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:compensation) %>:</strong></dt>
+  <dd><%= @trip.compensation %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= @trip.user.email %></dd>
 </dl>
