@@ -37,9 +37,15 @@
 </div>
 
 <% @all_comments.each do |comm| %>
-
-    <div><%= image_tag  comm.user.profile.avatar.url, :class => 'avatar'%><%= comm.user.profile.name %></div>
-    <div><%= comm.comment.html_safe %></div>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <%= image_tag  comm.user.profile.avatar.url, :class => 'media-object avatar'%>
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= comm.user.profile.name %> said:</h4>
+        <%= comm.comment.html_safe %>
+      </div>
+    </div>
 
 <% end %>
 

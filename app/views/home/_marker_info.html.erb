@@ -1,0 +1,17 @@
+<div style='padding-left: 20px; padding-bottom: 20px'>
+    <h3><%= trip.name %></h3>
+  <div><strong><%= link_to "More Info", trip_path(trip) %></strong></div>
+    <br>
+    <dl class="dl-horizontal">
+      <dt>Origin</dt>
+      <dd><%= trip.origin.address %> </dd>
+      <dt>Destination</dt>
+      <dd><%= trip.destination.address %> </dd>
+      <dt>Number of Seats Left</dt>
+      <dd><%= trip.seats_remaining || 0%> </dd>
+    </dl>
+    <button type="button" class="btn btn-primary btn-block">Book Now!</button>
+    <br>
+
+</div>
+

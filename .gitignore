@@ -5,3 +5,4 @@ tmp/
 *.swp
 tags
 .idea
+public/uploads/*

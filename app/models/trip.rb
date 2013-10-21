@@ -24,6 +24,21 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  class << self  #class methods
+    def search_by_loc(coors = "Austin,TX")
+
+       @locations = Location.near(coors, 300);
+       return_trips = Array.new
+
+       @locations.each do |loc|
+         if(loc.location_type == 'origin')
+          return_trips << Trip.find(loc.trip_id)
+        end
+       end
+       return return_trips
+    end
+  end
+
   private
     def set_remaining_seats
       self.seats_remaining = self.total_seats
