@@ -5,7 +5,7 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = current_user.trips.all
+    @trips = TripDecorator.decorate_collection(current_user.trips.all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @trip = current_user.trips.find(params[:id])
+    @trip = TripDecorator.decorate(current_user.trips.find(params[:id]))
     @comment = Comment.new
     @all_comments = @trip.comments.recent.all
     respond_to do |format|

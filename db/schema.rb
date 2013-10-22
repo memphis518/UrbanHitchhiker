@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131018191723) do
+ActiveRecord::Schema.define(:version => 20131022182548) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20131018191723) do
     t.datetime "updated_at",    :null => false
     t.string   "location_type"
     t.integer  "trip_id"
+    t.string   "timezone"
   end
 
   create_table "profiles", :force => true do |t|

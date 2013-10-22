@@ -47,7 +47,7 @@
       <dt><strong><%= model_class.human_attribute_name(:destination) %>:</strong></dt>
       <dd><%= @trip.destination.address %></dd>
       <dt><strong>Start Time:</strong></dt>
-      <dd><%= @trip.start_datetime %></dd>
+      <dd><%= @trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></dd>
       <dt><strong><%= model_class.human_attribute_name(:transportation) %>:</strong></dt>
       <dd><%= @trip.transportation %></dd>
       <dt><strong><%= model_class.human_attribute_name(:total_seats) %>:</strong></dt>

@@ -38,6 +38,8 @@ gem 'font-awesome-rails'
 gem 'carrierwave'
 gem 'acts_as_commentable'
 gem 'bootstrap-wysihtml5-rails'
+gem 'timezone'
+gem 'draper', '~> 1.0'
 
 
 

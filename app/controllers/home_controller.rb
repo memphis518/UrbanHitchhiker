@@ -10,7 +10,8 @@ class HomeController < ApplicationController
           @coors = Geocoder.coordinates('Austin,TX')
         end
       end
-      @trips = Trip.search_by_loc(@coors)
+      @trips = TripDecorator.decorate_collection(Trip.search_by_loc(@coors))
+
 
   end
 end

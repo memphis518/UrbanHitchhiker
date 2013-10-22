@@ -68,7 +68,7 @@
               <td> <%= trip.destination.address %></td>
               <td> <%= trip.seats_remaining %></td>
               <td> <%= trip.compensation %></td>
-              <td> <%= trip.start_datetime %></td>
+              <td> <%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></td>
 
           </tr>
       <% end %>

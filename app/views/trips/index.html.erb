@@ -28,7 +28,7 @@
         <td><%= trip.total_seats%></td>
         <td><%= trip.seats_remaining%></td>
         <td><%= trip.compensation%></td>
-        <td><%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P") %></td>
+        <td><%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></td>
         <td><%= trip.transportation %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
