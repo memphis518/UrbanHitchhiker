@@ -16,7 +16,7 @@ class Trip < ActiveRecord::Base
 
   validate :start_datetime_is_future, :on => :create
 
-  before_create :set_remaining_seats
+  before_save :set_remaining_seats
 
   def start_datetime_is_future
     if start_datetime
@@ -41,7 +41,11 @@ class Trip < ActiveRecord::Base
 
   private
     def set_remaining_seats
-      self.seats_remaining = self.total_seats
+      if(self.seats_remaining.nil?)
+        self.seats_remaining = self.total_seats
+      else
+        self.seats_remaining = self.seats_remaining + (self.total_seats - self.total_seats_was)
+      end
     end
 
 end

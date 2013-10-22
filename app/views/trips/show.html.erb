@@ -1,63 +1,117 @@
+<script>
+    $( document ).ready(function() {
+         var map  = initializeMap(<%= @trip.origin.latitude %>, <%= @trip.origin.longitude %>);
+        displayDirectionsOnMap(map, '<%= @trip.origin.address %>', '<%= @trip.destination.address %>')
+    });
+</script>
+
 <%- model_class = Trip -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<div class="row-fluid">
+  <div class='span6'>
+    <div>
+        <h1><%=t '.title', :default => @trip.name %></h1>
+    </div>
+  </div>
+
+  <div class='span6'>
+      <div class='btn-group'>
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+                    trips_path, :class => 'btn-primary btn'  %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_trip_path(@trip), :class => 'btn-primary btn' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    trip_path(@trip),
+                    :method => 'delete',
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-warning' %>
+      </div>
+   </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:origin) %>:</strong></dt>
-  <dd><%= @trip.origin.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:destination) %>:</strong></dt>
-  <dd><%= @trip.destination.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @trip.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:start_datetime) %>:</strong></dt>
-  <dd><%= @trip.start_datetime %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:transportation) %>:</strong></dt>
-  <dd><%= @trip.transportation %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:total_seats) %>:</strong></dt>
-  <dd><%= @trip.total_seats %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:seats_remaining) %>:</strong></dt>
-  <dd><%= @trip.seats_remaining %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:compensation) %>:</strong></dt>
-  <dd><%= @trip.compensation %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @trip.user.email %></dd>
-</dl>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              trips_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_trip_path(@trip), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              trip_path(@trip),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<div class="row-fluid">
+  <div class='span12'>
+    <div class='map-container'>
+      <div id='map-canvas'/>
+    </div>
+  </div>
 </div>
 
-<% @all_comments.each do |comm| %>
-    <div class="media">
-      <a class="pull-left" href="#">
-        <%= image_tag  comm.user.profile.avatar.url, :class => 'media-object avatar'%>
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading"><%= comm.user.profile.name %> said:</h4>
-        <%= comm.comment.html_safe %>
-      </div>
-    </div>
+<hr/>
+<br/><br/>
+<div class='row-fluid'>
+  <div class='span12'>
+    <dl class="dl-horizontal">
+      <dt ><strong><%= model_class.human_attribute_name(:origin) %>:</strong></dt>
+      <dd><%= @trip.origin.address %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:destination) %>:</strong></dt>
+      <dd><%= @trip.destination.address %></dd>
+      <dt><strong>Start Time:</strong></dt>
+      <dd><%= @trip.start_datetime %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:transportation) %>:</strong></dt>
+      <dd><%= @trip.transportation %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:total_seats) %>:</strong></dt>
+      <dd><%= @trip.total_seats %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:seats_remaining) %>:</strong></dt>
+      <dd><%= @trip.seats_remaining %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:compensation) %>:</strong></dt>
+      <dd><%= @trip.compensation %></dd>
+      <dt><strong>Created By:</strong></dt>
+      <dd>
+        <div class="media">
+            <a class="pull-left" href="#">
+              <%= image_tag  @trip.user.profile.avatar.url, :class => 'media-object img-circle avatar'%>
+            </a>
+            <div class="media-body">
+              <%= @trip.user.profile.name %>
+            </div>
+        </div>
+      </dd>
+    </dl>
+  </div>
+ </div>
+ <br/>
+<hr/>
 
-<% end %>
-
-<%= form_for [@trip, @comment], :html => { :class => 'form-horizontal' } do |f| %>
-    <div class="control-group">
-      <%= f.label :comment, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :comment, :class => 'text_field comment_field' %>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-    </div>
-<% end %>
+<div class='row-fluid'>
+    <div class='span12'>
+        <div><h3>Comments:</h3></div>
+        <br/>
+        <table class='table table-striped'>
+        <% @all_comments.each do |comm| %>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="media">
+                          <a class="pull-left" href="#">
+                            <%= image_tag  comm.user.profile.avatar.url, :class => 'media-object img-circle avatar'%>
+                          </a>
+                          <div class="media-body">
+                            <h5 class="media-heading"><%= comm.user.profile.name %> said:</h5>
+                            <%= comm.comment.html_safe %>
+                          </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        <% end %>
+        </table>
+  </div>
+</div>
+<hr/>
+<br/><br/>
+<div class='row-fluid'>
+  <div class='span12'>
+        <%= form_for [@trip, @comment]  do |f| %>
+            <div class="control-group">
+              <%= f.label :comment, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_area :comment, :class => 'text_field comment_field' %>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit nil, :class => 'btn btn-primary' %>
+            </div>
+        <% end %>
+   </div>
+</div>

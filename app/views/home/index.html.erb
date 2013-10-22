@@ -1,13 +1,13 @@
 <script>
   $( document ).ready(function() {
         <% if !@coors.nil? %>
-            var map  = initialize(<%= @coors[0] %>, <%= @coors[1] %>);
+            var map  = initializeMap(<%= @coors[0] %>, <%= @coors[1] %>);
         <% else %>
-            var map  = initialize(null,null);
+            var map  = initializeMap(null,null);
         <% end %>
 
         <% @trips.each do |trip| %>
-            addMarker(map, <%= trip.origin.latitude %>, <%= trip.origin.longitude %>, '<%= trip.name %>', "<%= j render partial: 'marker_info', locals: {trip: trip} %>")
+            addMapMarker(map, <%= trip.origin.latitude %>, <%= trip.origin.longitude %>, '<%= trip.name %>', "<%= j render partial: 'marker_info', locals: {trip: trip} %>")
         <% end %>
 
       $(".address_search_field").geocomplete();
@@ -18,7 +18,7 @@
 <div class="row-fluid">
   <div class='span12'>
      <%= bootstrap_form_tag("/", method:"get", class:"form-horizontal") do %>
-        <%= text_field_tag "location", nil, class: 'text_field address_field address_search_field'  %>
+        <%= text_field_tag "location", params[:location], class: 'text_field address_field address_search_field'  %>
         <%= submit_tag "Search" , class: 'btn'%>
      <% end %>
   </div>
