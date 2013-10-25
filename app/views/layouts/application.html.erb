@@ -35,6 +35,8 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="http://www.google.com/jsapi" language="javascript"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3XMGPCO6UvrebpCdqfwC23UeGVrb2OsU&sensor=true&libraries=places"></script>
 
@@ -51,10 +53,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">UrbanHitchHiker</a>
+          <a class="brand" href="/"><%= fa_icon "thumbs-up rotate-270" %></a><a class="brand" href="/"> UrbanHitchHiker</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-
+              <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                  Action
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- dropdown menu links -->
+                </ul>
+              </div>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -82,7 +92,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2013</p>
+        <p>&copy; UrbanHitchHiker 2013</p>
       </footer>
 
     </div> <!-- /container -->

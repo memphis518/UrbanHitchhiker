@@ -21,7 +21,7 @@
   </thead>
   <tbody>
     <% @trips.each do |trip| %>
-      <tr>
+      <tr class='data-link' data-link="<%= trip_path(trip) %>">
         <td><%= trip.name %></td>
         <td><%= trip.origin.address %></td>
         <td><%= trip.destination.address %></td>

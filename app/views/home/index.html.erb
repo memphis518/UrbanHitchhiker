@@ -12,6 +12,8 @@
 
       $(".address_search_field").geocomplete();
       $.fn.geocomplete($(".address_search_field"));
+
+      initializeTableLinks();
 });
 
 </script>
@@ -52,11 +54,11 @@
       </thead>
       <tbody>
       <% @trips.each do |trip| %>
-          <tr>
+          <tr class='data-link' data-link="<%= trip_path(trip) %>">
             <td>
               <div class="media">
                 <a class="pull-left" href="#">
-                  <%= image_tag  trip.user.profile.avatar.url, :class => 'media-object avatar'%>
+                  <%= image_tag  trip.user.profile.avatar.url, :class => 'media-object img-circle avatar-sm'%>
                 </a>
                 <div class="media-body">
                   <%= trip.user.profile.name %>

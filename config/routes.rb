@@ -4,6 +4,7 @@ UrbanHitchHiker::Application.routes.draw do
 
   resources :trips do
       resources 'comments', :only => [:create]
+      resources :bookings, :only => [:index, :show, :new, :create, :destroy]
   end
 
   get "home/index"

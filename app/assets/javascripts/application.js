@@ -17,7 +17,7 @@
 //= require_tree .
 
 
-
+// GOOGLE MAPS FUNCTIONALITY
 function initializeMap(lat, long) {
 
     //Default Location
@@ -79,6 +79,14 @@ function displayDirectionsOnMap(map, origin, destination)
     });
 
 }
+
+//JQUERY HELPERS
+function initializeTableLinks(){
+    $("tr[data-link]").click(function() {
+        window.location = this.dataset.link;
+    })
+}
+
 
 
 

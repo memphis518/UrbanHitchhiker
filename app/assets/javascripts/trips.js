@@ -19,4 +19,6 @@ $( document ).ready(function() {
         "color": false
     });
 
+    initializeTableLinks();
+
 });

@@ -10,7 +10,10 @@
       <dt>Number of Seats Left</dt>
       <dd><%= trip.seats_remaining || 0%> </dd>
     </dl>
-    <button type="button" class="btn btn-primary btn-block">Book Now!</button>
+    <%= button_to 'Book Now!',
+                trip_bookings_path(trip),
+                :method => :post,
+                :class => 'btn-primary btn btn-block' %>
     <br>
 
 </div>

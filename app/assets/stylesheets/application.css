@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require jquery.ui.all
+ *= require font-awesome
  *= require bootstrap-wysihtml5
  *= require_tree .
  */
@@ -27,4 +28,11 @@
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
 
 .avatar{height: 75px; width: 75px;}
+.avatar-sm{height: 35px; width: 35px;}
+
+tr.data-link {
+    cursor: pointer;
+}
+
+
 

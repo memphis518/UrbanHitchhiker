@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :trips
+  has_many :bookings
   belongs_to :profile
 
   before_create :create_profile_record

@@ -7,6 +7,8 @@ class Trip < ActiveRecord::Base
   has_one :origin, :class_name => 'Location' , :dependent => :destroy, :conditions => { :location_type => :origin }
   has_one :destination, :class_name => 'Location', :dependent => :destroy, :conditions => { :location_type => :destination }
 
+  has_many :bookings
+
   accepts_nested_attributes_for :origin, :allow_destroy => true
   accepts_nested_attributes_for :destination, :allow_destroy => true
 
@@ -24,7 +26,7 @@ class Trip < ActiveRecord::Base
     end
   end
 
-  class << self  #class methods
+  class << self
     def search_by_loc(coors = "Austin,TX")
 
        @locations = Location.near(coors, 300);
