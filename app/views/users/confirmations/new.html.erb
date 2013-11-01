@@ -1,0 +1,19 @@
+<h2>Resend confirmation instructions</h2>
+
+<% if @user.errors.any? %>
+    <div id="errors" class="alert alert-error fade in">
+      <button class="close" data-dismiss="alert" type="button">×</button>
+      <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </div>
+<% end %>
+
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+
+   <%= f.email_field :email, :class => 'text_field', :autofocus => true, :placeholder => 'Email Address' %>
+
+  <div><%= f.submit "Resend confirmation instructions",  :class => 'btn btn-primary'  %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

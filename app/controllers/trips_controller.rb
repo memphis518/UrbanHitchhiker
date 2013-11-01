@@ -1,42 +1,40 @@
 class TripsController < ApplicationController
-  
-  before_filter :login_required
-  layout 'application', :only => [:index] 
-  
+
+  before_filter :authenticate_user!
+
   # GET /trips
-  # GET /trips.xml
+  # GET /trips.json
   def index
-    @trips = Trip.find_all_by_user_id(session[:user_id])
+    @trips = TripDecorator.decorate_collection(current_user.trips.all)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @trips }
+      format.json { render json: @trips }
     end
   end
 
   # GET /trips/1
-  # GET /trips/1.xml
+  # GET /trips/1.json
   def show
-    @trip = Trip.find(params[:id])
-    if(@trip.user_id == session[:user_id])
-      respond_to do |format|
-        format.html # show.html.erb
-        format.xml  { render :xml => @trip }
-      end
-    else
-      render :template => 'users/loginfailed'
+    @trip = TripDecorator.decorate(current_user.trips.find(params[:id]))
+    @comment = Comment.new
+    @all_comments = @trip.comments.recent.all
+    @all_bookings = BookingDecorator.decorate_collection(@trip.bookings.all)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @trip }
     end
-    
   end
 
   # GET /trips/new
-  # GET /trips/new.xml
+  # GET /trips/new.json
   def new
     @trip = Trip.new
-
+    @trip.build_origin
+    @trip.build_destination
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @trip }
+      format.json { render json: @trip }
     end
   end
 
@@ -46,75 +44,48 @@ class TripsController < ApplicationController
   end
 
   # POST /trips
-  # POST /trips.xml
+  # POST /trips.json
   def create
-    @user = User.find(session[:user_id])
-    @trip = @user.trips.create(params[:trip])
-    
+
+    @trip = Trip.new(params[:trip])
+    @trip.user = current_user
+
     respond_to do |format|
       if @trip.save
-        format.html { render(:partial => 'save_successful', :layout => false) }
-        format.xml  { render :xml => @trip, :status => :created, :location => @trip }
+        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        format.json { render json: @trip, status: :created, location: @trip }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @trip.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new' }
+        format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PUT /trips/1
-  # PUT /trips/1.xml
+  # PUT /trips/1.json
   def update
     @trip = Trip.find(params[:id])
-    if(@trip.user_id == session[:user_id])
-      respond_to do |format|
-        if @trip.update_attributes(params[:trip])
-          format.html { render(:partial => 'save_successful', :layout => false) }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @trip.errors, :status => :unprocessable_entity }
-        end
+
+    respond_to do |format|
+      if @trip.update_attributes(params[:trip])
+        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
-    else
-      render :template => 'users/loginfailed'
     end
   end
 
   # DELETE /trips/1
-  # DELETE /trips/1.xml
+  # DELETE /trips/1.json
   def destroy
     @trip = Trip.find(params[:id])
-    if(@trip.user_id == session[:user_id])
-      @trip.destroy
+    @trip.destroy
 
-      respond_to do |format|
-        format.html { redirect_to(trips_url) }
-        format.xml  { head :ok }
-      end
-    else
-      render :template => 'users/loginfailed'
+    respond_to do |format|
+      format.html { redirect_to trips_url }
+      format.json { head :no_content }
     end
   end
-
-  # GET /trips/1/map
-  def map
-     @trip = Trip.find(params[:id])
-     if(@trip.user_id == session[:user_id])
-         render :template => 'trips/map'      
-     end 
-  end  
-
-  # POST /trips/1/matches
-  def matches
-     @trip = Trip.find(params[:id])
-     if(@trip.user_id == session[:user_id])
-          matches = Trip.getMatchesByBounds(ActiveSupport::JSON.decode(params[:bounds]), session[:user_id]);
-          matches.each { |match| match[:infowindow] = render_to_string :partial => 'info_window', 
-                                                                       :locals => { :match => match } }
-          render :json => matches     
-     end 
-  end 
-
-
 end

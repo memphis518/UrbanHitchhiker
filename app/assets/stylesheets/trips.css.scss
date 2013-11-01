@@ -1,0 +1,25 @@
+// Place all the styles related to the trips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.address_field {
+    width: 50%;
+}
+
+.comment_field {
+    width: 75%;
+    height: 60px;
+}
+
+.map-container { height:350px; }
+#map-canvas { height: 100% }
+#map-canvas img {max-width: none;}
+#map-canvas label {width: auto; display:inline;}
+
+.trip_address_color { color: #147eb3
+}
+
+
+.trip_details_row{
+  padding-bottom: 10px;
+}

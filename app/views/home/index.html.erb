@@ -1,0 +1,52 @@
+<script>
+  $( document ).ready(function() {
+        <% if !@coors.nil? %>
+            var map  = initializeMap(<%= @coors[0] %>, <%= @coors[1] %>);
+        <% else %>
+            var map  = initializeMap(null,null);
+        <% end %>
+
+        <% @trips.each do |trip| %>
+            addMapMarker(map, <%= trip.origin.latitude %>, <%= trip.origin.longitude %>, '<%= trip.name %>', "<%= j render partial: 'marker_info', locals: {trip: trip} %>")
+        <% end %>
+
+      $(".address_search_field").geocomplete();
+      $.fn.geocomplete($(".address_search_field"));
+
+      initializeTableLinks();
+});
+
+</script>
+<div class="row-fluid">
+  <div class='span11'>
+     <%= bootstrap_form_tag("/", method:"get", class:"form-horizontal") do %>
+        <%= text_field_tag "location", params[:location], class: 'text_field address_field address_search_field'  %>
+        <%= submit_tag "Search" , class: 'btn btn-primary'%>
+     <% end %>
+  </div>
+</div>
+
+<div class="row-fluid">
+      <div class='span11'>
+              <div class='map-container'>
+                <div id='map-canvas'/>
+              </div>
+      </div>
+
+
+
+</div>
+
+<div class="row-fluid">
+  <div class='span11'>
+    <table class="table table-hover">
+      <tbody>
+      <% @trips.each do |trip| %>
+          <%= render :partial => 'trips/trip_listing', :locals =>  {trip: trip} %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

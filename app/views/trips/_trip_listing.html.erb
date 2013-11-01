@@ -1,0 +1,48 @@
+<tr class='data-link' data-link="<%= trip_path(trip) %>">
+  <td>
+    <div class='container-fluid'>
+        <div class='row-fluid'>
+          <div class='span7'>
+               <h4><%= image_tag  trip.user.profile.avatar.url, :class => 'img-circle avatar-sm'%> <%= trip.name %></h4>
+               <%= fa_icon "map-marker", class: 'trip_address_color'  %> &nbsp;
+               <small><%= trip.origin.address %></small>
+               &nbsp;
+               <small><%= fa_icon "chevron-right" %> <%= fa_icon "chevron-right" %> <%= fa_icon "chevron-right" %></small>
+               &nbsp;
+               <small><%= trip.destination.address %></small>
+               <br/>
+               <small>
+                  Bacon ipsum dolor sit amet chuck boudin pig tri-tip. Brisket shoulder pancetta corned beef biltong jowl. Meatball frankfurter short loin chicken kevin.
+               </small>
+          </div>
+          <div class='span3'>
+              <div class='container-fluid'>
+                <br/>
+                <div class='row-fluid'>
+                  <%= fa_icon "calendar-o", class: 'trip_address_color'  %>
+                  <small><%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></small>
+                </div>
+                <div class='row-fluid'>
+                  <%= fa_icon "tachometer", class: 'trip_address_color'  %>
+                  <small><%= trip.transportation %> with <%= trip.total_seats %> seats (<%= trip.seats_remaining %> left)</small>
+                </div>
+                <div class='row-fluid'>
+                  <%= fa_icon "gift", class: 'trip_address_color'  %>
+                  <small><%= trip.compensation %></small>
+                </div>
+              </div>
+          </div>
+          <div class='span2'>
+            <div class='container-fluid'>
+              <div class='row-fluid book_button_row'>
+                <%= button_to 'Book Now!',
+                              trip_bookings_path(trip),
+                              :method => :post,
+                              :class => 'btn-primary' %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </td>
+</tr>

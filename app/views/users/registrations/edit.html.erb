@@ -1,0 +1,38 @@
+<h2>Edit Account Information</h2>
+
+<% if @user.errors.any? %>
+    <div id="errors" class="alert alert-error fade in">
+      <button class="close" data-dismiss="alert" type="button">×</button>
+      <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </div>
+<% end %>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+
+  <%= f.email_field :email, :class => 'text_field', :autofocus => true, :placeholder => 'Email Address' %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <br/>
+  <%= f.password_field :password, :class => 'text_field', :placeholder => 'New Password' , :autocomplete => "off"%> <i>(leave blank if you don't want to change it)</i>
+
+  <br/>
+  <%= f.password_field :password_confirmation, :class => 'text_field', :placeholder => 'Password Confirmation' , :autocomplete => "off"%>
+
+  <br/>
+  <%= f.password_field :current_password, :class => 'text_field', :placeholder => 'Current Password' , :autocomplete => "off"%> <i>(we need your current password to confirm your changes)</i>
+
+  <div><%= f.submit "Update",  :class => 'btn btn-primary'  %> <%= link_to "Back", :back, :class => 'btn'  %></div>
+<% end %>
+
+
+<br/><br/>
+<h3>Cancel Account</h3>
+
+<p>Please click on the button below to cancel your account.</p>
+  <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-primary' %>
+</div>

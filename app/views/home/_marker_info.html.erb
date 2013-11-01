@@ -1,0 +1,36 @@
+<div class='marker_window'>
+    <h3><%= trip.name %></h3>
+  <div><strong><%= link_to "More Info", trip_path(trip) %></strong></div>
+    <br>
+    <table class='marker_table'>
+      <tr>
+         <td class='span1 trip_details_row'>
+            <%= fa_icon "map-marker 2x", class: 'trip_address_color'  %>
+         </td>
+         <td class='span3 trip_details_row'>
+            <%= trip.origin.address %>
+            &nbsp;<%= fa_icon "chevron-right" %> <%= fa_icon "chevron-right" %> <%= fa_icon "chevron-right" %>
+            &nbsp;<%= trip.destination.address %>
+         </td>
+      </tr>
+      <tr>
+        <td class='span1 trip_details_row'><%= fa_icon "calendar-o 2x", class: 'trip_address_color'  %></td>
+        <td class='span3 trip_details_row'><%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></td>
+      </tr>
+      <tr>
+        <td class='span1 trip_details_row'>
+          <%= fa_icon "tachometer 2x", class: 'trip_address_color'  %>
+        </td>
+        <td class='span3 trip_details_row'>
+          <%= trip.transportation %> with <%= trip.total_seats %> seats (<%= trip.seats_remaining %> left)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="button" class="btn btn-primary btn-block">Book Now!</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+

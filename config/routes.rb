@@ -1,14 +1,18 @@
 UrbanHitchHiker::Application.routes.draw do
- 
-  match 'users/login' => 'users#login'
 
-  resources :users, :only => [:new, :create, :edit, :update]
-  
-  resources :trips
+  resources :profiles, :only => [:edit, :show, :update]
 
-  match 'trips/:id/map' => 'trips#map'
-  match 'trips/:id/matches' => 'trips#matches'
-  
+  resources :trips do
+      resources 'comments', :only => [:create]
+      resources :bookings, :only => [:index, :show, :new, :create, :destroy]
+  end
+
+  get "home/index"
+
+  devise_for :users
+
+  root :to => "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -58,11 +62,11 @@ UrbanHitchHiker::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  # match ':controller(/:action(/:id))(.:format)'
 end
