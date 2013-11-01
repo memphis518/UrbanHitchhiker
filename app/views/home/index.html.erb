@@ -18,16 +18,16 @@
 
 </script>
 <div class="row-fluid">
-  <div class='span12'>
+  <div class='span11'>
      <%= bootstrap_form_tag("/", method:"get", class:"form-horizontal") do %>
         <%= text_field_tag "location", params[:location], class: 'text_field address_field address_search_field'  %>
-        <%= submit_tag "Search" , class: 'btn'%>
+        <%= submit_tag "Search" , class: 'btn btn-primary'%>
      <% end %>
   </div>
 </div>
 
 <div class="row-fluid">
-      <div class='span12'>
+      <div class='span11'>
               <div class='map-container'>
                 <div id='map-canvas'/>
               </div>
@@ -38,41 +38,11 @@
 </div>
 
 <div class="row-fluid">
-  <div class='span12'>
+  <div class='span11'>
     <table class="table table-hover">
-      <thead>
-          <tr>
-              <th>Driver</th>
-              <th>Trip Name</th>
-              <th>Origin</th>
-              <th>Destination</th>
-              <th>Seats Remaining</th>
-              <th>Compensation</th>
-              <th>Start Time</th>
-
-          </tr>
-      </thead>
       <tbody>
       <% @trips.each do |trip| %>
-          <tr class='data-link' data-link="<%= trip_path(trip) %>">
-            <td>
-              <div class="media">
-                <a class="pull-left" href="#">
-                  <%= image_tag  trip.user.profile.avatar.url, :class => 'media-object img-circle avatar-sm'%>
-                </a>
-                <div class="media-body">
-                  <%= trip.user.profile.name %>
-                </div>
-              </div>
-            </td>
-              <td> <%= trip.name %></td>
-              <td> <%= trip.origin.address %></td>
-              <td> <%= trip.destination.address %></td>
-              <td> <%= trip.seats_remaining %></td>
-              <td> <%= trip.compensation %></td>
-              <td> <%= trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></td>
-
-          </tr>
+          <%= render :partial => 'trips/trip_listing', :locals =>  {trip: trip} %>
       <% end %>
       </tbody>
     </table>

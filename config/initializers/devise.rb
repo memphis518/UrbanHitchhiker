@@ -208,7 +208,7 @@ Devise.setup do |config|
   # config.navigational_formats = ["*/*", :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   config.secret_key = 'ea396c6601fcb1451f44b8b14208cf39765ebabf590ab2d0ff7175eeb7a34a02bd265891250216948ef335c6e6c3d96006ecaef2ad3817d4769ac0c1c8865cab'
 

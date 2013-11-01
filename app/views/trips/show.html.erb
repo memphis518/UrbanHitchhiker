@@ -9,15 +9,15 @@
 <div class="row-fluid">
   <div class='span6'>
     <div>
-      <a class="pull-left" href="#">
-        <%= image_tag  @trip.user.profile.avatar.url, :class => 'media-object img-circle avatar'%>
-      </a>
-      &nbsp;
-      <h1><%=t '.title', :default => @trip.name %></h1>
+      <h1>
+        <%= link_to image_tag(@trip.user.profile.avatar.url, :class => 'img-circle avatar'), @trip.user.profile %>
+        &nbsp;
+        <%=t '.title', :default => @trip.name %>
+      </h1>
     </div>
   </div>
 
-  <div class='span6'>
+  <div class='span5'>
       <div class='btn-group pull-right'>
         <%= link_to t('.back', :default => t("helpers.links.back")),
                     trips_path, :class => 'btn-primary btn'  %>
@@ -34,7 +34,7 @@
 </br>
 
 <div class="row-fluid">
-  <div class='span12'>
+  <div class='span11'>
     <div class='map-container'>
       <div id='map-canvas'/>
     </div>
@@ -47,8 +47,7 @@
   <div class='span6'>
     <br/>
         <div class='row-fluid'>
-          <div class='span1 trip_details_row'>&nbsp;</div>
-          <div class='span1 trip_details_row'>
+          <div class='span1 offset1 trip_details_row'>
             <%= fa_icon "map-marker 2x", class: 'trip_address_color'  %>
           </div>
           <div class='span10 trip_details_row'>
@@ -61,23 +60,19 @@
 
         </div>
         <div class='row-fluid'>
-          <div class='span1 trip_details_row'>&nbsp;</div>
-          <div class='span1 trip_details_row'><%= fa_icon "calendar-o 2x", class: 'trip_address_color'  %></div>
+          <div class='span1 offset1 trip_details_row'><%= fa_icon "calendar-o 2x", class: 'trip_address_color'  %></div>
           <div class='span10 trip_details_row'><%= @trip.start_datetime.strftime("%m/%d/%y %I:%M %P %Z") %></div>
         </div>
         <div class='row-fluid'>
-          <div class='span1 trip_details_row'>&nbsp;</div>
-          <div class='span1 trip_details_row'><%= fa_icon "tachometer 2x", class: 'trip_address_color'  %></div>
+          <div class='span1 offset1 trip_details_row'><%= fa_icon "tachometer 2x", class: 'trip_address_color'  %></div>
           <div class='span10 trip_details_row'><%= @trip.transportation %> with <%= @trip.total_seats %> seats (<%= @trip.seats_remaining %> left)</div>
         </div>
         <div class='row-fluid'>
-          <div class='span1 trip_details_row'>&nbsp;</div>
-          <div class='span1 trip_details_row'><%= fa_icon "gift 2x", class: 'trip_address_color'  %></div>
+          <div class='span1 offset1 trip_details_row'><%= fa_icon "gift 2x", class: 'trip_address_color'  %></div>
           <div class='span10 trip_details_row'><%= @trip.compensation %></div>
         </div>
         <div class='row-fluid'>
-          <div class='span1 trip_details_row'>&nbsp;</div>
-          <div class='span6 trip_details_row'>
+          <div class='span6 offset1 trip_details_row'>
             <%= button_to 'Book Now!',
                           trip_bookings_path(@trip),
                           :method => :post,
@@ -86,7 +81,7 @@
           </div>
         </div>
   </div>
-  <div class='span3'>
+  <div class='span4'>
     <div><h4>Who's along for the ride?</h4></div>
     <table class='table table-striped'>
       <tbody>
@@ -94,10 +89,10 @@
           <tr>
             <td>
               <a class="pull-left" href="#">
-                <%= image_tag  @trip.user.profile.avatar.url, :class => 'media-object img-circle avatar-sm'%>
+                <%= link_to image_tag(booking.user.profile.avatar.url, :class => 'media-object img-circle avatar-sm'), booking.user.profile%>
               </a>
             </td>
-            <td><%= booking.user.profile.name %></td>
+            <td><%= link_to booking.user.profile.name, booking.user.profile %></td>
           </tr>
       <% end %>
       </tbody>
@@ -107,7 +102,7 @@
  <br/>
 
 <div class='row-fluid'>
-    <div class='span12'>
+    <div class='span11'>
         <div><h3>Comments:</h3></div>
         <br/>
         <table class='table table-striped'>
@@ -118,7 +113,7 @@
                     <td>
                         <div class="media">
                           <a class="pull-left" href="#">
-                            <%= image_tag  comm.user.profile.avatar.url, :class => 'media-object img-circle avatar'%>
+                            <%= link_to image_tag(comm.user.profile.avatar.url, :class => 'media-object img-circle avatar'), comm.user.profile %>
                           </a>
                           <div class="media-body">
                             <h5 class="media-heading"><%= comm.user.profile.name %> said:</h5>
@@ -138,13 +133,12 @@
   <div class='span12'>
         <%= form_for [@trip, @comment]  do |f| %>
             <div class="control-group">
-              <%= f.label :comment, :class => 'control-label' %>
               <div class="controls">
-                <%= f.text_area :comment, :class => 'text_field comment_field' %>
+                <%= f.text_area :comment, :class => 'text_field comment_field', :placeholder => 'Enter comment here.' %>
               </div>
-            </div>
-            <div class="form-actions">
-              <%= f.submit nil, :class => 'btn btn-primary' %>
+              <div>
+                <%= f.submit nil, :class => 'btn btn-primary' %>
+              </div>
             </div>
         <% end %>
    </div>

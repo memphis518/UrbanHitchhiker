@@ -231,7 +231,7 @@ body {
 }
 
 a {
-    color: #6ca257;
+    color: #333333;
     text-decoration: none;
 }
 
@@ -4436,8 +4436,8 @@ input[type="submit"].btn.btn-mini {
 .navbar .divider-vertical {
     height: 40px;
     margin: 0 9px;
-    border-right: 1px solid #ce4213;
-    border-left: 1px solid #dd4814;
+    border-right: 1px solid #333333;
+    border-left: 1px solid #333333;
 }
 
 .navbar .btn,
@@ -4606,7 +4606,7 @@ input[type="submit"].btn.btn-mini {
     padding: 10px 15px 10px;
     color: #ffffff;
     text-decoration: none;
-    text-shadow: 0 1px 0 #ce4213;
+    text-shadow: 0 1px 0 #436733;
 }
 
 .navbar .nav .dropdown-toggle .caret {
@@ -4617,7 +4617,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:hover {
     color: #ffffff;
     text-decoration: none;
-    background-color: #a5360f;
+    background-color: #436733;
 }
 
 .navbar .nav > .active > a,
@@ -4625,7 +4625,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > .active > a:focus {
     color: #ffffff;
     text-decoration: none;
-    background-color: #a5360f;
+    background-color: #436733;
     -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
     -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
     box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
@@ -4737,7 +4737,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     color: #ffffff;
-    background-color: #a5360f;
+    background-color: #579142;
 }
 
 .navbar .nav li.dropdown > .dropdown-toggle .caret {
@@ -6159,7 +6159,7 @@ a.badge:focus {
 
 .navbar .nav > li > a {
     border-right: 1px solid rgba(0, 0, 0, 0.2);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .navbar .nav > li > a:hover {
