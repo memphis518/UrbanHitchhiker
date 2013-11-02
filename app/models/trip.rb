@@ -2,7 +2,7 @@ class Trip < ActiveRecord::Base
 
   acts_as_commentable
 
-  attr_accessible :name, :start_datetime, :transportation, :destination_attributes, :origin_attributes, :total_seats, :seats_remaining, :compensation
+  attr_accessible :name, :start_datetime, :transportation, :destination_attributes, :origin_attributes, :total_seats, :compensation, :description
 
   has_one :origin, :class_name => 'Location' , :dependent => :destroy, :conditions => { :location_type => :origin }
   has_one :destination, :class_name => 'Location', :dependent => :destroy, :conditions => { :location_type => :destination }
@@ -14,11 +14,13 @@ class Trip < ActiveRecord::Base
 
   belongs_to :user
 
-  validates_presence_of :name, :destination, :origin, :start_datetime, :transportation, :total_seats
+  validates_presence_of :name, :destination, :origin, :start_datetime, :transportation, :total_seats, :description
 
   validate :start_datetime_is_future, :on => :create
 
-  before_save :set_remaining_seats
+  def seats_remaining
+     return total_seats - bookings.count
+  end
 
   def start_datetime_is_future
     if start_datetime
@@ -40,14 +42,5 @@ class Trip < ActiveRecord::Base
        return return_trips
     end
   end
-
-  private
-    def set_remaining_seats
-      if(self.seats_remaining.nil?)
-        self.seats_remaining = self.total_seats
-      else
-        self.seats_remaining = self.seats_remaining + (self.total_seats - self.total_seats_was)
-      end
-    end
 
 end

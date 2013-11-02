@@ -12,7 +12,7 @@
                <small><%= trip.destination.address %></small>
                <br/>
                <small>
-                  Bacon ipsum dolor sit amet chuck boudin pig tri-tip. Brisket shoulder pancetta corned beef biltong jowl. Meatball frankfurter short loin chicken kevin.
+                  <%= simple_format(truncate(trip.description , :length => 170)) %>
                </small>
           </div>
           <div class='span3'>
