@@ -4,17 +4,11 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @profile.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @profile.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:transportation) %>:</strong></dt>
-  <dd><%= @profile.transportation %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:avatar) %>:</strong></dt>
-  <dd><%= image_tag  @profile.avatar.url, :class => 'img-circle avatar'%> </dd>
+  <dt> <%= image_tag  @profile.avatar.url, :class => 'img-circle avatar'%></strong></dt>
+  <dd>
+   <h3><%= @profile.name %></h3>
+   <small>
+     <%= @profile.description %>
+   </small>
+  </dd>
 </dl>
-
-<div class="form-actions">
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_profile_path(@profile), :class => 'btn' %>
-</div>

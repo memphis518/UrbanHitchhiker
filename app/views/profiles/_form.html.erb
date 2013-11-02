@@ -6,19 +6,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :description, :class => 'control-label' %>
+    <%= f.label 'Bio', :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :description, :class => 'text_area' %>
+      <%= f.text_area :description, :class => 'text_area description_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :transportation, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :transportation, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-     <%= f.label :avatar, :class => 'control-label' %>
+     <%= f.label 'Profile Picture', :class => 'control-label' %>
 
      <div class="controls">
        <%= image_tag  @profile.avatar.url, :class => 'img-circle avatar'%>
