@@ -5,8 +5,8 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = TripDecorator.decorate_collection(current_user.trips.all)
-
+    #@trips = TripDecorator.decorate_collection(current_user.trips.load)
+    @trips = Trip.all.load
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @trips }
@@ -19,7 +19,7 @@ class TripsController < ApplicationController
     @trip = TripDecorator.decorate(current_user.trips.find(params[:id]))
     @comment = Comment.new
     @all_comments = @trip.comments.recent.all
-    @all_bookings = BookingDecorator.decorate_collection(@trip.bookings.all)
+    @all_bookings = BookingDecorator.decorate_collection(@trip.bookings.all.to_a)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @trip }
@@ -47,7 +47,7 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
 
-    @trip = Trip.new(params[:trip])
+    @trip = Trip.new(trip_parameters)
     @trip.user = current_user
 
     respond_to do |format|
@@ -67,7 +67,7 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
 
     respond_to do |format|
-      if @trip.update_attributes(params[:trip])
+      if @trip.update_attributes(trip_parameters)
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
         format.json { head :no_content }
       else
@@ -88,4 +88,12 @@ class TripsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def trip_parameters
+      params.require(:trip).permit(:name, :start_datetime, :transportation,
+                                   :total_seats, :compensation, :description,
+                                    destination_attributes: [:address],
+                                    origin_attributes: [:address])
+    end
 end
