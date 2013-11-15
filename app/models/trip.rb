@@ -2,10 +2,8 @@ class Trip < ActiveRecord::Base
 
   acts_as_commentable
 
-  attr_accessible :name, :start_datetime, :transportation, :destination_attributes, :origin_attributes, :total_seats, :compensation, :description
-
-  has_one :origin, :class_name => 'Location' , :dependent => :destroy, :conditions => { :location_type => :origin }
-  has_one :destination, :class_name => 'Location', :dependent => :destroy, :conditions => { :location_type => :destination }
+  has_one :origin, -> { where :location_type => :origin }, :class_name => 'Location' , :dependent => :destroy
+  has_one :destination, -> { where :location_type => :destination }, :class_name => 'Location', :dependent => :destroy
 
   has_many :bookings
 
