@@ -31,7 +31,6 @@ gem 'devise'
 gem 'nokogiri'
 gem 'rspec-rails'
 gem 'factory_girl_rails', '~> 4.0'
-gem 'enumerated_attribute'
 gem 'geocoder'
 gem 'nested_form'
 gem 'font-awesome-rails'
@@ -40,6 +39,7 @@ gem 'acts_as_commentable'
 gem 'bootstrap-wysihtml5-rails'
 gem 'timezone'
 gem 'draper', '~> 1.0'
+gem "cancan"
 
 
 

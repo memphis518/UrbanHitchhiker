@@ -1,12 +1,14 @@
 class TripsController < ApplicationController
 
+  load_and_authorize_resource
+
   before_filter :authenticate_user!
 
   # GET /trips
   # GET /trips.json
   def index
-    #@trips = TripDecorator.decorate_collection(current_user.trips.load)
-    @trips = Trip.all.load
+    @trips = TripDecorator.decorate_collection(current_user.trips.load)
+    #@trips = Trip.all.load
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @trips }
@@ -16,7 +18,7 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @trip = TripDecorator.decorate(current_user.trips.find(params[:id]))
+    @trip = TripDecorator.decorate(Trip.find(params[:id]))
     @comment = Comment.new
     @all_comments = @trip.comments.recent.all
     @all_bookings = BookingDecorator.decorate_collection(@trip.bookings.all.to_a)

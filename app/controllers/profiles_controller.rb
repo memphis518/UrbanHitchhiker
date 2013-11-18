@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
 
+  load_and_authorize_resource
   before_filter :authenticate_user!
+
 
   # GET /profiles/1
   # GET /profiles/1.json
@@ -24,7 +26,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.profile
 
     respond_to do |format|
-      if @profile.update_attributes(params[:profile])
+      if @profile.update_attributes(profile_parameters)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
@@ -32,6 +34,12 @@ class ProfilesController < ApplicationController
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+  private
+  def profile_parameters
+    params.require(:profile).permit(:name, :description, :avatar)
   end
 
 end
