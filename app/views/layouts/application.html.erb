@@ -85,7 +85,9 @@
               <li class="nav-header">Sidebar</li>
 	      <% if current_user %>
 	      	<li><%= link_to "Profile", [:edit, current_user.profile]  %></li>
-	      <% end %>	
+	      <% else %>
+            <li><%= link_to "Profile", new_user_session_path  %></li>
+	      <% end %>
 	      <li><%= link_to "Trips", "/trips"  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
