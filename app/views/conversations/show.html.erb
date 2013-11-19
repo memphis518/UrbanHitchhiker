@@ -1,0 +1,20 @@
+<h3><%= @conversation.subject %></h3>
+<br>
+<div class="messages">
+  <table class="table table-striped">
+       <tbody>
+              <% @receipts.each do |receipt| %>
+                    <tr>
+                        <td>
+                          <p>
+                            <%= link_to image_tag(receipt.message.sender.profile.avatar.url, :class => 'img-circle avatar-sm'), receipt.message.sender.profile %>
+                            <i>On <%= receipt.message.updated_at.strftime("%m/%d/%y") %> <%= link_to receipt.message.sender.name, receipt.message.sender.profile %> said:</i>
+                          </p>
+                          <%= receipt.message.body %>
+                          <br><br>
+                        </td>
+                    </tr>
+              <% end %>
+       </tbody>
+   </table>
+</div>

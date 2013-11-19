@@ -1,11 +1,23 @@
 <ul class="nav nav-pills">
-  <li class="active">
+  <li
+  <% if @box.eql? 'inbox' %>
+    class="active"
+  <% end %>
+  >
     <%= link_to "Inbox", conversations_path  %>
   </li>
-  <li>
+  <li
+  <% if @box.eql? 'sentbox' %>
+    class="active"
+  <% end %>
+  >
     <%= link_to "Sent", conversations_path(:box => 'sentbox')  %>
   </li>
-  <li>
+  <li
+  <% if @box.eql? 'trash' %>
+    class="active"
+  <% end %>
+  >
     <%= link_to "Trash", conversations_path(:box => 'trash')  %>
   </li>
 </ul>
@@ -14,8 +26,11 @@
   <tbody>
   <% @conversations.each do |convo| %>
       <tr>
-            <td><%= convo.last_sender.name %></td>
-            <td><%= convo.subject %></td>
+            <td>
+                <%= link_to image_tag(convo.last_sender.profile.avatar.url, :class => 'img-circle avatar-sm') + ' ' + convo.last_sender.name, convo.last_sender.profile %>
+            </td>
+            <td><%= link_to(truncate(convo.subject, :length => 55), conversation_path(convo.id,:box => @box)) %></td>
+            <td><%= link_to(truncate(convo.last_message.body, :length => 55), conversation_path(convo.id,:box => @box)) %></td>
             <td><%= convo.updated_at.strftime("%m/%d/%y") %></td>
       </tr>
   <% end %>
