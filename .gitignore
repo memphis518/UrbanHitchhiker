@@ -6,3 +6,4 @@ tmp/
 tags
 .idea
 public/uploads/*
+config/database.yml
