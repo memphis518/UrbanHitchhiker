@@ -18,7 +18,11 @@ class Ability
     can :create, Booking
     can :destroy, Booking, :user_id => user.id
 
+    #Comment Abilities
     can :create, Comment
+
+    #Conversation Abilities
+    can [:create, :update, :destroy, :read], Conversation
 
   end
 end

@@ -1,0 +1,23 @@
+<ul class="nav nav-pills">
+  <li class="active">
+    <%= link_to "Inbox", conversations_path  %>
+  </li>
+  <li>
+    <%= link_to "Sent", conversations_path(:box => 'sentbox')  %>
+  </li>
+  <li>
+    <%= link_to "Trash", conversations_path(:box => 'trash')  %>
+  </li>
+</ul>
+
+<table class="table table-hover">
+  <tbody>
+  <% @conversations.each do |convo| %>
+      <tr>
+            <td><%= convo.last_sender.name %></td>
+            <td><%= convo.subject %></td>
+            <td><%= convo.updated_at.strftime("%m/%d/%y") %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

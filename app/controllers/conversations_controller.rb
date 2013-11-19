@@ -1,4 +1,4 @@
-class ConversationController < ApplicationController
+class ConversationsController < ApplicationController
 
   before_filter :get_mailbox, :get_box, :get_user
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
@@ -6,11 +6,11 @@ class ConversationController < ApplicationController
 
   def index
     if @box.eql? "inbox"
-      @conversations = @mailbox.inbox.page(params[:page]).per(9)
+      @conversations = @mailbox.inbox
     elsif @box.eql? "sentbox"
-      @conversations = @mailbox.sentbox.page(params[:page]).per(9)
-    else
-      @conversations = @mailbox.trash.page(params[:page]).per(9)
+      @conversations = @mailbox.sentbox
+    elsif @box.eql? "trash"
+      @conversations = @mailbox.trash
     end
   end
 
