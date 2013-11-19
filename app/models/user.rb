@@ -9,11 +9,24 @@ class User < ActiveRecord::Base
   has_many :bookings
   belongs_to :profile
 
+  acts_as_messageable
+
   before_create :create_profile_record
 
   def create_profile_record
       profile = Profile.create
       self.profile_id = profile.id
+  end
+
+  def mailboxer_email(object)
+    name = self.profile.name unless self.profile.nil?
+    email = self.email
+    return "#{name} <#{email}>" if email.present?
+  end
+
+  def name
+    return self.profile.name unless self.profile.nil?
+    return self.email
   end
 
 end
