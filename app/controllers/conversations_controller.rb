@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
 
-  before_filter :get_mailbox, :get_box, :get_user
+  before_filter :get_mailbox, :get_box, :get_user, :get_unread_count_from_inbox
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
   load_and_authorize_resource
 
@@ -12,6 +12,7 @@ class ConversationsController < ApplicationController
     elsif @box.eql? "trash"
       @conversations = @mailbox.trash
     end
+
   end
 
   def show
@@ -33,6 +34,9 @@ class ConversationsController < ApplicationController
     if params[:untrash].present?
       @conversation.untrash(current_user)
     end
+    if params[:trash].present?
+      @conversation.move_to_trash(current_user)
+    end
     if params[:reply_all].present?
       last_receipt = @mailbox.receipts_for(@conversation).last
       @receipt = current_user.reply_to_all(last_receipt, params[:body])
@@ -47,21 +51,6 @@ class ConversationsController < ApplicationController
   end
 
   def create
-  end
-
-  def reply
-    current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
-    redirect_to conversation
-  end
-
-  def trash
-    conversation.move_to_trash(current_user)
-    redirect_to :conversations
-  end
-
-  def untrash
-    conversation.untrash(current_user)
-    redirect_to :conversations
   end
 
   private
@@ -88,6 +77,10 @@ class ConversationsController < ApplicationController
       redirect_to conversations_path(:box => @box)
       return
     end
+  end
+
+  def get_unread_count_from_inbox
+    @unread_count = @mailbox.inbox({:read => false}).count
   end
 
 end

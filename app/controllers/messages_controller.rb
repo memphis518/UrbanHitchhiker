@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_filter :get_mailbox, :get_box, :get_user
+  before_filter :get_mailbox, :get_box, :get_user, :get_unread_count_from_inbox
 
   def index
     redirect_to conversations_path(:box => @box)
@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 
   def new
     if params[:receiver].present?
-      @recipient = current_user.find_by_slug(params[:receiver])
+      @recipient = User.find_by_profile_id(params[:receiver]).id
       return if @recipient.nil?
     end
   end
@@ -23,13 +23,7 @@ class MessagesController < ApplicationController
 
   def create  
     @recipients = Array.new
-    recipient_emails = params[:recipients].split(',')
-    recipient_emails.each do |recipient|
-      r = User.find_by_email(recipient)
-      next if r.nil?
-      @recipients << r
-    end  
-    @recipients = @recipients.uniq
+    @recipients << User.find_by_id(params[:receiver])
     @receipt = current_user.send_message(@recipients, params[:body], params[:subject])
 
     if (@receipt.errors.blank?)
@@ -64,5 +58,9 @@ class MessagesController < ApplicationController
     end
     @box = params[:box]
   end
-    
+
+  def get_unread_count_from_inbox
+    @unread_count = @mailbox.inbox({:read => false}).count
+  end
+
 end

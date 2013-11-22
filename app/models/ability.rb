@@ -6,7 +6,10 @@ class Ability
 
     #Trip Abilities
     can :read, Trip
-    can [:create, :update, :destroy], Trip, :user_id => user.id
+    can [:create, :update, :destroy,], Trip, :user_id => user.id
+    can [:message, :book], Trip do |trip|
+      user.id != trip.user_id
+    end
 
     #Profile Abilities
     can [:read], Profile
@@ -15,14 +18,13 @@ class Ability
     end
 
     #Booking Abilities
-    can :create, Booking
     can :destroy, Booking, :user_id => user.id
 
     #Comment Abilities
     can :create, Comment
 
     #Conversation Abilities
-    can [:create, :update, :destroy, :read], Conversation
+    can [:update, :read], Conversation
 
   end
 end

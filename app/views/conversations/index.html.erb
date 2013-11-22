@@ -1,26 +1,4 @@
-<ul class="nav nav-pills">
-  <li
-  <% if @box.eql? 'inbox' %>
-    class="active"
-  <% end %>
-  >
-    <%= link_to "Inbox", conversations_path  %>
-  </li>
-  <li
-  <% if @box.eql? 'sentbox' %>
-    class="active"
-  <% end %>
-  >
-    <%= link_to "Sent", conversations_path(:box => 'sentbox')  %>
-  </li>
-  <li
-  <% if @box.eql? 'trash' %>
-    class="active"
-  <% end %>
-  >
-    <%= link_to "Trash", conversations_path(:box => 'trash')  %>
-  </li>
-</ul>
+<%= render partial: "mailbox_nav", locals: {box: @box, unread_count: @unread_count} %>
 
 <table class="table table-hover">
   <tbody>
@@ -32,6 +10,22 @@
             <td><%= link_to(truncate(convo.subject, :length => 55), conversation_path(convo.id,:box => @box)) %></td>
             <td><%= link_to(truncate(convo.last_message.body, :length => 55), conversation_path(convo.id,:box => @box)) %></td>
             <td><%= convo.updated_at.strftime("%m/%d/%y") %></td>
+            <td>
+              <%= link_to fa_icon("mail-reply-all"),
+                          conversation_path(convo.id),
+                          :class => 'btn btn-primary btn-small' %>
+              <% if @box.eql? 'trash' %>
+                  <%= link_to fa_icon("inbox"),
+                              conversation_path(convo.id, :untrash => true),
+                              :method => :put,
+                              :class => 'btn btn-primary btn-small' %>
+              <% else %>
+                  <%= link_to fa_icon("trash-o"),
+                              conversation_path(convo.id, :trash => true),
+                              :method => :put,
+                              :class => 'btn btn-primary btn-small' %>
+              <% end %>
+            </td>
       </tr>
   <% end %>
   </tbody>
