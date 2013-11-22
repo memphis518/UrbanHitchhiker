@@ -42,6 +42,7 @@
 
 
     <%= javascript_include_tag "application" %>
+
   </head>
   <body>
 
@@ -88,8 +89,8 @@
 	      <% else %>
             <li><%= link_to "Profile", new_user_session_path  %></li>
 	      <% end %>
-	      <li><%= link_to "Trips", "/trips"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+	        <li><%= link_to "Trips", trips_path  %></li>
+            <li><%= link_to "Messages", conversations_path  %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

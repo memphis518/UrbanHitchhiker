@@ -8,7 +8,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     @trips = TripDecorator.decorate_collection(current_user.trips.load)
-    #@trips = Trip.all.load
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @trips }

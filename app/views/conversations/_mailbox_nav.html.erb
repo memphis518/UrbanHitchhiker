@@ -1,0 +1,27 @@
+<ul class="nav nav-pills">
+  <li
+  <% if box.eql? 'inbox' %>
+  class="active"
+  <% end %>
+  >
+    <% if unread_count == 0 %>
+        <%= link_to "Inbox", conversations_path  %>
+    <% else %>
+        <%= link_to "Inbox (" + unread_count.to_s + ")", conversations_path  %>
+    <% end %>
+  </li>
+  <li
+  <% if box.eql? 'sentbox' %>
+  class="active"
+  <% end %>
+  >
+    <%= link_to "Sent", conversations_path(:box => 'sentbox')  %>
+  </li>
+  <li
+  <% if box.eql? 'trash' %>
+  class="active"
+  <% end %>
+  >
+    <%= link_to "Trash", conversations_path(:box => 'trash')  %>
+  </li>
+</ul>

@@ -1,0 +1,32 @@
+<%= render partial: "mailbox_nav", locals: {box: @box, unread_count: @unread_count} %>
+
+<table class="table table-hover">
+  <tbody>
+  <% @conversations.each do |convo| %>
+      <tr>
+            <td>
+                <%= link_to image_tag(convo.last_sender.profile.avatar.url, :class => 'img-circle avatar-sm') + ' ' + convo.last_sender.name, convo.last_sender.profile %>
+            </td>
+            <td><%= link_to(truncate(convo.subject, :length => 55), conversation_path(convo.id,:box => @box)) %></td>
+            <td><%= link_to(truncate(convo.last_message.body, :length => 55), conversation_path(convo.id,:box => @box)) %></td>
+            <td><%= convo.updated_at.strftime("%m/%d/%y") %></td>
+            <td>
+              <%= link_to fa_icon("mail-reply-all"),
+                          conversation_path(convo.id),
+                          :class => 'btn btn-primary btn-small' %>
+              <% if @box.eql? 'trash' %>
+                  <%= link_to fa_icon("inbox"),
+                              conversation_path(convo.id, :untrash => true),
+                              :method => :put,
+                              :class => 'btn btn-primary btn-small' %>
+              <% else %>
+                  <%= link_to fa_icon("trash-o"),
+                              conversation_path(convo.id, :trash => true),
+                              :method => :put,
+                              :class => 'btn btn-primary btn-small' %>
+              <% end %>
+            </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

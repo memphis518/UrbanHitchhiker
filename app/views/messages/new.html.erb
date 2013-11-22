@@ -1,0 +1,25 @@
+<%= render partial: "conversations/mailbox_nav", locals: {box: @box, unread_count: @unread_count} %>
+<hr>
+<%= bootstrap_form_tag '/messages' do %>
+
+    <%= hidden_field_tag :receiver, @recipient %>
+
+    <div class="control-group">
+      <label class="control-label" for="inputSubject">Subject</label>
+      <div class="controls">
+        <%= text_field_tag 'subject' %>
+       </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputBody">Body</label>
+      <div class="controls">
+        <%= text_area_tag 'body' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag 'Send', :class => 'btn btn-primary' %>
+      </div>
+    </div>
+
+<% end %>

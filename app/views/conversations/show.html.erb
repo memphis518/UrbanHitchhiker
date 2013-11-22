@@ -1,0 +1,54 @@
+<%= render partial: "mailbox_nav", locals: {box: @box, unread_count: @unread_count} %>
+
+<div class='show_message_div'>
+    <h3>
+      <%= @conversation.subject %>
+
+      <% if @box.eql? 'trash' %>
+          <%= link_to fa_icon("inbox") + ' UnTrash',
+                      conversation_path(@conversation.id, :untrash => true),
+                      :method => :put,
+                      :class => 'btn btn-primary pull-right' %>
+      <% else %>
+          <%= link_to fa_icon("trash-o") + ' Trash',
+                      conversation_path(@conversation.id, :trash => true),
+                      :method => :put,
+                      :class => 'btn btn-primary pull-right' %>
+      <% end %>
+    </h3>
+    <br>
+    <div>
+      <table class="table table-striped">
+           <tbody>
+                  <% @receipts.each do |receipt| %>
+                        <tr>
+                            <td>
+                              <p>
+                                <%= link_to image_tag(receipt.message.sender.profile.avatar.url, :class => 'img-circle avatar-sm'), receipt.message.sender.profile %>
+                                <i>On <%= receipt.message.updated_at.strftime("%m/%d/%y") %> <%= link_to receipt.message.sender.name, receipt.message.sender.profile %> said:</i>
+                              </p>
+                              <%= receipt.message.body %>
+                              <br><br>
+                            </td>
+                        </tr>
+                  <% end %>
+           </tbody>
+       </table>
+    </div>
+</div>
+<% unless @box.eql?'trash' %>
+<div class='reply_form'>
+    <hr>
+    <%= bootstrap_form_tag conversation_path(@conversation), :method => :put, :class => 'form-horizontal' do %>
+
+        <div>
+            <%= text_area_tag :body, nil, :class => "conversation_body_field" %>
+        </div>
+        <br>
+        <div class='pull-right'>
+            <%= submit_tag 'Reply All', :name => :reply_all, :class => 'btn btn-primary' %>
+        </div>
+
+    <% end %>
+</div>
+<%end %>
