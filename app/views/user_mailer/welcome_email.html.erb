@@ -1,0 +1,19 @@
+
+<h1>Welcome to UrbanHitchhiker!</h1>
+
+<div class='well'>
+    <p>
+      You have successfully signed up to UrbanHitchhiker, with the username: <b> <%= @user.email %> </b>.<br/>
+    </p>
+
+    <p>
+      Just follow this link to <%= link_to  'sign in', @sign_in_url %> and explore all the the rides that are
+      available and create your own trips to take passengers with you!
+    </p>
+
+    <p>
+      You can also update your profile to tell fellow hitchhikers a little bit about yourself! Follow this <%= link_to('link', @profile_url )%> to edit your profile.
+    </p>
+
+    <p>Thanks for joining and have a great day!</p>
+</div>

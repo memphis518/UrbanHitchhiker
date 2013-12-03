@@ -1,0 +1,31 @@
+
+<%= render 'layouts/mailer_header' %>
+
+<div class='well'>
+  <div>
+    <div class='box user_box'>
+      <table>
+        <tr>
+          <td><%= image_tag @message.sender.profile.avatar, :class => 'img-circle avatar'%></td>
+          <td>&nbsp;&nbsp;<%= @message.sender.profile.name %></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class='box'>
+      <tr class='header'>
+        <td><%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %></td>
+      </tr>
+      <tr class='message'>
+        <td class='box'><%= raw @message.body %></td>
+      </tr>
+      <tr>
+        <td class='pull-right'><%= link_to 'Reply',
+                                           conversation_path(@message.conversation.id),
+                                           :class => 'btn btn-primary btn-small' %></td>
+      </tr>
+    </table>
+    <small>Visit your <%= link_to 'inbox',conversations_path %> and go to your notifications for more info.</small>
+  </div>
+</div>
+

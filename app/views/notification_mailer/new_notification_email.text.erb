@@ -1,0 +1,10 @@
+You have a new notification from <%= @notification.sender.profile.name %>
+===============================================
+
+<%= @notification.subject.html_safe? ? @notification.subject : strip_tags(@notification.subject) %>
+
+-----------------------------------------------
+<%= @notification.body.html_safe? ? @notification.body : strip_tags(@notification.body) %>
+-----------------------------------------------
+
+Visit <%= root_url %> and go to messages to view your inbox

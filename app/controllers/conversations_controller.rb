@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
 
+  before_filter :authenticate_user!
   before_filter :get_mailbox, :get_box, :get_user, :get_unread_count_from_inbox
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
   load_and_authorize_resource

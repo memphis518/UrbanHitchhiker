@@ -41,6 +41,7 @@ gem 'timezone'
 gem 'draper', '~> 1.0'
 gem 'cancan'
 gem 'mailboxer'
+gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 
 
 
