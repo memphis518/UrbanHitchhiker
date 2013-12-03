@@ -23,6 +23,10 @@ class MailPreview < MailView
     NotificationMailer.send_email(message, receiver)
   end
 
-
+  def comment_email
+    trip = Trip.first
+    comment = Comment.first
+    mail = CommentMailer.comment_email(comment, trip)
+  end
 
 end

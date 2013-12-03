@@ -1,29 +1,101 @@
 <%= render 'layouts/mailer_header' %>
 
-<div class='well'>
+<div >
   <div>
-    <div class='box user_box'>
+    <div style='padding-left:20px;'>
       <table>
         <tr>
-          <td><%= image_tag @message.sender.profile.avatar, :class => 'img-circle avatar'%></td>
+          <td><%= image_tag @message.sender.profile.avatar, style: '-webkit-border-radius: 500px; -moz-border-radius: 500px; border-radius: 500px; height: 75px; width: 75px;' %></td>
           <td>&nbsp;&nbsp;<%= @message.sender.profile.name %></td>
         </tr>
       </table>
     </div>
-
-    <table class='box'>
-      <tr class='header'>
-        <td>RE: <%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %></td>
-      </tr>
-      <tr class='message'>
-        <td class='box'><%= raw @message.body %></td>
+    <br>
+    <table style='min-height: 20px;
+            padding: 19px;
+            margin-bottom: 20px;
+            border: 1px solid #e3e3e3;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);' width='100%'>
+      <tr >
+        <td><h3>RE: <%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %></h3></td>
       </tr>
       <tr>
-        <td class='pull-right'><%= link_to 'Reply',
-                                           conversation_path(@message.conversation.id),
-                                           :class => 'btn btn-primary btn-small' %></td>
+        <td style='border: 1px solid #ffffff;
+                background-color: #f5f5f5;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);'>
+
+          <div style='min-height: 100px; margin-bottom: 20px; padding:19px;'>
+            <%= raw @message.body %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td >
+          <br>
+          <%= link_to 'Reply',
+                      conversation_path(@message.conversation.id),
+                      :style => "display: inline-block;
+                                            *display: inline;
+                                            padding: 4px 12px;
+                                            margin-bottom: 0;
+                                            *margin-left: .3em;
+                                            font-size: 14px;
+                                            line-height: 20px;
+                                            color: #333333;
+                                            text-align: center;
+                                            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+                                            vertical-align: middle;
+                                            cursor: pointer;
+                                            background-color: #f5f5f5;
+                                            *background-color: #e6e6e6;
+                                            background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+                                            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+                                            background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+                                            background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+                                            background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+                                            background-repeat: repeat-x;
+                                            border: 1px solid #cccccc;
+                                            *border: 0;
+                                            border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+                                            border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+                                            border-bottom-color: #b3b3b3;
+                                            -webkit-border-radius: 4px;
+                                            -moz-border-radius: 4px;
+                                            border-radius: 4px;
+                                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+                                           filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+                                           *zoom: 1;
+                                           -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+                                           -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+                                           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+                                           color: #ffffff;
+                                           text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+                                           background-color: #147eb3;
+                                           *background-color: #147eb3;
+                                           background-image: -moz-linear-gradient(top, #147eb3, #147eb3);
+                                           background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#147eb3), to(#147eb3));
+                                           background-image: -webkit-linear-gradient(top, #147eb3, #147eb3);
+                                           background-image: -o-linear-gradient(top, #147eb3, #147eb3);
+                                           background-image: linear-gradient(to bottom, #147eb3, #147eb3);
+                                           background-repeat: repeat-x;
+                                           border-color: #147eb3 #147eb3 #147eb3;
+                                           border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+                                           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdd4814', endColorstr='#ffdd7a14', GradientType=0);
+                                           filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);" %></td>
       </tr>
     </table>
     <small>Visit your <%= link_to 'inbox',conversations_path %> and go to your notifications for more info.</small>
   </div>
 </div>
+
+<%= render 'layouts/mailer_footer' %>
