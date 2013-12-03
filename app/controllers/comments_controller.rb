@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
-  load_and_authorize_resource
   before_filter :authenticate_user!
 
   # POST /trips/1/comments
@@ -8,11 +7,12 @@ class CommentsController < ApplicationController
   def create
 
     @trip = Trip.find(params[:trip_id])
-    @comment = @trip.comments.create(comment_parameters)
+    @comment = @trip.comments.create(:title => @trip.name, :comment => params[:comment][:comment])
     @comment.title = @trip.name
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        CommentMailer.comment_email(@comment, @trip).deliver
         format.html { redirect_to @trip, notice: 'Comment was successfully added.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
@@ -20,11 +20,6 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  private
-  def comment_parameters
-    params.require(:comment).permit(:trip_id, :comment, :name)
   end
 
 end

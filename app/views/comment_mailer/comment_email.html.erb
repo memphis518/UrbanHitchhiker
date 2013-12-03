@@ -2,7 +2,7 @@
 
 <div>
   <p>
-    The following comment is from a fellow hitchhiker, <b><%= @creator.profile.name %></b>, on your trip, "<%= @trip.name %>".<br/>
+    The following comment is from a fellow hitchhiker, <b><%= @comment.user.profile.name %></b>, on your trip, "<%= @trip.name %>".<br/>
   </p>
 
   <div style='border: 1px solid #ffffff;
@@ -18,5 +18,5 @@
               padding:19px;'>
     <%= @comment.comment %>
   </div>
-
+  <small>Visit the trip <%= link_to '"' + @trip.name + '"', trip_path(@trip) %> for more info.</small>
 </div>
