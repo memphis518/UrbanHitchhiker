@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        CommentMailer.comment_email(@comment, @trip).deliver
+        CommentMailer.delay.comment_email(@comment.id, @trip.id)
         format.html { redirect_to @trip, notice: 'Comment was successfully added.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
