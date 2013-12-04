@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/37signals/mail_view.git
+  revision: 35ca575d6fa4b0410c3bf1d356677585f0a76de1
+  specs:
+    mail_view (2.0.1)
+      tilt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -190,6 +197,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   less-rails
+  mail_view!
   mailboxer
   maskedinput-rails
   nested_form

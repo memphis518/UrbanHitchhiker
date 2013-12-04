@@ -18,7 +18,9 @@ class Ability
     end
 
     #Booking Abilities
+    can [:create, :read], Booking
     can :destroy, Booking, :user_id => user.id
+
 
     #Comment Abilities
     can :create, Comment

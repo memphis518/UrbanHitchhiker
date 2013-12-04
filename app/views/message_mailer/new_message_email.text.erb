@@ -1,0 +1,10 @@
+You have a new message from <%= @message.sender.profile.name %>
+===============================================
+
+<%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %>
+
+-----------------------------------------------
+<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+-----------------------------------------------
+
+Visit <%= root_url %> and go to messages to view your inbox

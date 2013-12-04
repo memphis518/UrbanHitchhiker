@@ -27,7 +27,15 @@ UrbanHitchHiker::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  #default URL mailer
+
+  # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.sendmail_settings = {:arguments => "-i"}
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.asset_host = "http://localhost:3000"
 
 end

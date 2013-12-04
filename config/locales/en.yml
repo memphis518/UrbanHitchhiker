@@ -2,4 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  mailboxer:
+      message_mailer:
+        subject_new: "UrbanHitchhiker new message: %{subject}"
+        subject_reply: "UrbanHitchhiker new reply: %{subject}"
+      notification_mailer:
+        subject: "UrbanHitchhiker new notification: %{subject}"

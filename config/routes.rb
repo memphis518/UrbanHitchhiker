@@ -16,4 +16,8 @@ UrbanHitchHiker::Application.routes.draw do
 
   root :to => "home#index"
 
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end
+
 end

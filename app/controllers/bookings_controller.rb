@@ -13,6 +13,8 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        BookingMailer.new_booking_email(current_user, @trip).deliver
+        BookingMailer.notify_all_travelers_new(current_user,@trip).deliver
         format.html { redirect_to @trip, notice: 'Booking was successfully created.' }
         format.json { render json: @trip, status: :created, location: @trip }
       else
@@ -29,6 +31,9 @@ class BookingsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @booking = Booking.find(params[:id])
     @booking.destroy
+
+    BookingMailer.cancel_booking_email(current_user, @trip).deliver
+    BookingMailer.notify_all_travelers_cancel(current_user,@trip).deliver
 
     respond_to do |format|
       format.html { redirect_to @trip, notice: 'Your booking has been cancelled.' }

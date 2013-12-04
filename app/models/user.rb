@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   before_create :create_profile_record
 
+  after_create :send_welcome_email
+
   def create_profile_record
       profile = Profile.create
       self.profile_id = profile.id
@@ -27,6 +29,10 @@ class User < ActiveRecord::Base
   def name
     return self.profile.name unless self.profile.nil?
     return self.email
+  end
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver
   end
 
 end

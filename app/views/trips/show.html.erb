@@ -22,7 +22,7 @@
         <%= link_to t('.back', :default => t("helpers.links.back")),
                     trips_path, :class => 'btn-primary btn'  %>
         <% if can? :message, @trip %>
-            <%= link_to "Message Driver", new_message_path(:reciever => @trip.user.profile.id), :class => 'btn btn-primary' %>
+            <%= link_to "Message Driver", new_message_path(:receiver => @trip.user.profile.id), :class => 'btn btn-primary' %>
         <% end %>
         <% if can? :update, @trip %>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
