@@ -29,4 +29,34 @@ class MailPreview < MailView
     mail = CommentMailer.comment_email(comment, trip)
   end
 
+  def new_booking_email
+    user = User.first
+    trip = Trip.first
+
+    mail = BookingMailer.new_booking_email(user, trip)
+  end
+
+  def notify_all_travelers_new
+    user = User.first
+    trip = Trip.first
+
+    mail = BookingMailer.notify_all_travelers_new(user, trip)
+  end
+
+  def cancel_booking_email
+    user = User.first
+    trip = Trip.first
+
+    mail = BookingMailer.cancel_booking_email(user, trip)
+  end
+
+  def notify_all_travelers_cancel
+    user = User.first
+    trip = Trip.first
+
+    mail = BookingMailer.notify_all_travelers_cancel(user, trip)
+  end
+
+
+
 end

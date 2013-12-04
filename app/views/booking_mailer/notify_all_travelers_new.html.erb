@@ -1,0 +1,23 @@
+<h1>Someone is joining you!</h1>
+
+<div>
+
+  <p>
+    A new hitchhiker, <%= @hitchhiker.profile.name %>, is joining you for the trip, "<%= @trip.name %>", at <%= @trip.start_datetime.strftime("%m/%d/%y %I:%M %P") %>.
+  </p>
+
+  <p>
+    If you have any questions for the new passenger, you can send a private message <%= link_to "here", new_message_path(:receiver => @hitchhiker.profile.id) %>.
+    You will want to want to introduce yourself to the new passenger to find out more about them and make them feel welcome.
+  </p>
+
+  <p>
+    If you would like to send a message to the other riders in the trip, you can go <%= link_to 'here', trip_path(@trip) %> and enter a comment.  You can also go
+    <%= link_to 'here', trip_path(@trip) %> to view more information about the trip.
+  </p>
+
+  <p>
+    Thank you for using UrbanHitchhiker!
+  </p>
+
+</div>
