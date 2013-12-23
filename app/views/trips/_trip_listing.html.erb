@@ -3,7 +3,7 @@
     <div class='container-fluid'>
         <div class='row-fluid'>
           <div class='span7'>
-               <h4><%= image_tag  trip.user.profile.avatar.url, :class => 'img-circle avatar-sm'%> <%= trip.name %></h4>
+               <h4><%= trip.user.profile.profile_image_small %> <%= trip.name %></h4>
                <%= fa_icon "map-marker", class: 'trip_address_color'  %> &nbsp;
                <small><%= trip.origin.address %></small>
                &nbsp;

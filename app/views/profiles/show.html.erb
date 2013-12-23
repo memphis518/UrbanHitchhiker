@@ -1,16 +1,23 @@
 <%- model_class = Profile -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
 
 <dl class="dl-horizontal">
-  <dt> <%= image_tag  @profile.avatar.url, :class => 'img-circle avatar'%></strong></dt>
+  <dt> <%= @profile.profile_image %></strong></dt>
   <dd>
    <h3><%= @profile.name %></h3>
    <small>
      <%= @profile.description %>
    </small>
+   <br><br>
+   <dd><%= fa_icon 'twitter' %> <%= link_to @profile.twitter, @profile.twitter_link %></dd>
+   <dd><%= fa_icon 'facebook' %>&nbsp;&nbsp;&nbsp;<%= link_to @profile.facebook, @profile.facebook_link %></dd>
+   <dd><%= fa_icon 'instagram' %>&nbsp;&nbsp;<%= link_to @profile.instagram, @profile.instagram_link %></dd>
   </dd>
+
+  <dt>
+
+
+  </dt>
 </dl>
+
 <br>
 <%= link_to "Send A Private Message", new_message_path(:receiver => @profile.id), :class => 'btn btn-primary' %>

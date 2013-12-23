@@ -20,7 +20,7 @@ class TripsController < ApplicationController
   def show
     @trip = TripDecorator.decorate(Trip.find(params[:id]))
     @comment = Comment.new
-    @all_comments = @trip.comments.recent.all
+    @all_comments = CommentDecorator.decorate_collection(@trip.comments.recent.all)
     @all_bookings = BookingDecorator.decorate_collection(@trip.bookings.all.to_a)
     respond_to do |format|
       format.html # show.html.erb

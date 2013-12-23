@@ -10,7 +10,7 @@
   <div class='span6'>
     <div>
       <h1>
-        <%= link_to image_tag(@trip.user.profile.avatar.url, :class => 'img-circle avatar'), @trip.user.profile %>
+        <%= link_to @trip.user.profile.profile_image , @trip.user.profile %>
         &nbsp;
         <%=t '.title', :default => @trip.name %>
       </h1>
@@ -105,7 +105,7 @@
           <tr>
             <td>
               <a class="pull-left" href="#">
-                <%= link_to image_tag(booking.user.profile.avatar.url, :class => 'media-object img-circle avatar-sm'), booking.user.profile%>
+                <%= link_to booking.user.profile.profile_image_small, booking.user.profile%>
               </a>
             </td>
             <td><%= link_to booking.user.profile.name, booking.user.profile %></td>
@@ -129,11 +129,12 @@
                     <td>
                         <div class="media">
                           <a class="pull-left" href="#">
-                            <%= link_to image_tag(comm.user.profile.avatar.url, :class => 'media-object img-circle avatar'), comm.user.profile %>
+                            <%= link_to comm.user.profile.profile_image_small, comm.user.profile %>
+                            <%= comm.user.profile.name %> said:
                           </a>
-                          <div class="media-body">
-                            <h5 class="media-heading"><%= comm.user.profile.name %> said:</h5>
-                            <%= comm.comment.html_safe %>
+                          <br><br>
+                          <div>
+                            <%= comm.comment.comment.html_safe %>
                           </div>
                         </div>
                     </td>

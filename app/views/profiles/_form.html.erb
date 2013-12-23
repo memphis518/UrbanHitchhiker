@@ -1,24 +1,48 @@
-<%= form_for @profile, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label 'Bio', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :description, :class => 'text_area description_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-     <%= f.label 'Profile Picture', :class => 'control-label' %>
+<%= form_for @profile do |f| %>
 
-     <div class="controls">
-       <%= image_tag  @profile.avatar.url, :class => 'img-circle avatar'%>
-        <%= f.file_field :avatar %>
+   <div class="control-group">
+      <div class="controls input-prepend">
+       <span class='add-on'><%= fa_icon "user" %></span>
+       <%= f.text_field :name, :class => 'text_field', :placeholder => 'Your Name' %>
      </div>
    </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= @profile.profile_image %>
+      <%= f.file_field :avatar %>
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area description_field', :placeholder => 'Write something interesting about yourself.  Tell your story.  Why are you here?' %>
+    </div>
+  </div>
+
+
+    <div class="control-group">
+      <div class="controls input-prepend">
+        <span class='add-on'><%= fa_icon "twitter" %></span>
+        <%= f.text_field :twitter, :class => 'text_field', :placeholder => 'Twitter Handle' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls input-prepend">
+        <span class='add-on'><%= fa_icon "facebook" %></span>
+        <%= f.text_field :facebook, :class => 'text_field', :placeholder => 'Facebook Username' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls input-prepend">
+        <span class='add-on'><%= fa_icon "instagram" %></span>
+        <%= f.text_field :instagram, :class => 'text_field', :placeholder => 'Instagram Handle' %>
+      </div>
+    </div>
+
 
     <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

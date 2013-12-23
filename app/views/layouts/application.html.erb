@@ -61,7 +61,8 @@
 
                   <% if current_user %>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <%= image_tag  current_user.profile.avatar.url, :class => 'img-circle avatar-sm'%>&nbsp;&nbsp;<%= current_user.profile.name %> <%= fa_icon "caret-down" %>
+                      <%= current_user.profile.profile_image_small %>
+                      &nbsp;&nbsp;<%= current_user.profile.name %> <%= fa_icon "caret-down" %>
                       <ul class="dropdown-menu pull-right nav_user_menu">
                         <li><%= link_to('Sign Out', destroy_user_session_path) %></li>
                       </ul>
