@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @profile = Profile.find(params[:id])
+    @profile = ProfileDecorator.decorate(Profile.find(params[:id]))
 
     respond_to do |format|
       format.html # show.html.erb
@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    @profile = current_user.profile
+    @profile = ProfileDecorator.decorate(current_user.profile)
   end
 
   # PUT /profiles/1
@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.update_attributes(profile_parameters)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to ProfileDecorator.decorate(@profile), notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -39,7 +39,7 @@ class ProfilesController < ApplicationController
 
   private
   def profile_parameters
-    params.require(:profile).permit(:name, :description, :avatar)
+    params.require(:profile).permit(:name, :description, :avatar, :twitter, :facebook, :instagram)
   end
 
 end
